@@ -1,2 +1,2 @@
-# ash
-Asymptotic Stability for Humans
+# Asymptotic Stability for Humans
+
