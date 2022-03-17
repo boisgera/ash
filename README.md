@@ -4,7 +4,7 @@
 To generate the `doc.html` document:
 
 ``` bash
-$ conda env create -f 
+$ conda env create -f environment.yml
 $ conda activate ash
 $ ./build.sh
 ```
