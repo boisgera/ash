@@ -1,6 +1,12 @@
 
 # Asymptotic Stability for Humans
 
---------------------------------------------------------------------------------
+To generate the `doc.html` document:
 
-©️ 2022, Sébastien Boisgérault, [License CC BY 4.0](LICENSE.txt)
+``` bash
+$ conda env create -f 
+$ conda activate ash
+$ ./build.sh
+```
+
+©️ 2022, Sébastien Boisgérault, [License CC BY 4.0](LICENSE.txt).
