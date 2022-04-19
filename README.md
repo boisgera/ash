@@ -10,7 +10,7 @@
 
 ### Build
 
-To generate the `index.html` document:
+To generate the HTML document:
 
 ``` bash
 $ conda env create -f environment.yml
