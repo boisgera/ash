@@ -1,15 +1,50 @@
-% Asymptotic Stability for Humans
-% Sébastien Boisgérault, MINES ParisTech, PSL University
-% Wed 16 Mar 2022 19:39 GMT+1
+---
+title: Asymptotic Stability for Humans
+author: 
+- "[Sébastien Boisgérault](mailto:Sebastien.Boisgerault@minesparis.psl.eu), MINES Paris, PSL University"
+date: "Tue, 19 Apr 2022 09:58:16 +0200"
+---
 
-## Motivation, Intro, references, didactic choices
+## Intro, Motivation, Intro, references, didactic choices
 
 TODO:
 
   - "classic" definitions, what is hard, what is (the most) important, 
     why we can/shall do better. Explain & advocate.
 
-### System, IVP, maximal solutions, etc. {.definition}
+# Definitions & Notations
+
+### Vector Field {.definition} 
+An **(autonomous) vector field** is a $\mathbb{R}^n$-valued function $f$ 
+defined on an open subset of $\mathbb{R}^n$ (for some natural number $n$):
+$$
+f: U \subset \mathbb{R}^n \to \mathbb{R}^n,
+\qquad \partial U \cap U= \varnothing. 
+$$
+
+### Dynamical System {.definition}
+A vector field defines a unique **(autonomous) dynamical system** denoted 
+$\dot{x} = f(x)$.
+
+### Initial-Value Problem {.definition}
+An vector field $f$ and a state $x_0$ in the domain of $f$ define a unique
+**initial-value problem (IVP)** denoted
+$\dot{x} = f(x)$, $x(0) = x_0$.
+
+### Solution {.definition}
+A **(forward) solution** of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is 
+an absolutely continuous and $\mathbb{R}^n$-valued function $x$ defined on 
+$\left[0, \tau\right[$ for some $\tau \in \left]0, +\infty\right]$
+such that
+$$
+x(t) = x_0 + \int_0^t f(x(s)) \, ds, \qquad 0 \leq t < \tau.
+$$
+
+### Maximal, Global
+
+### Flow {.definition}
+
+Flow (notations), IVP, maximal solutions, etc. {.definition}
 🚧 TODO 🚧 
 
 ### Well-Posed System {.definition}
@@ -21,10 +56,26 @@ TODO:
 🚧 TODO 🚧
 
 ### Attractivity {.definition}
-🚧 TODO 🚧
+An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally) attractive**
+if for any $x_0$ in the domain of definition of $f$, the solution $x(t, x_0)$ 
+(exists for any $t\geq 0$ and) tends to $x_*$ as $t$ tends to $+\infty$.
+$$
+\forall \, x_* \in \mathrm{dom} \, f, \;
+\lim_{t \to +\infty} x(t, x_0) = x_*
+$$
 
-### Attractivity {.definition}
-🚧 TODO 🚧 
+# A Better Concept
+
+## Issues with attractivity
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/vinograd.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
+
+## Asymptotic Stability
 
 ### Asymptotic Stability {.definition}
 🚧 TODO 🚧 
@@ -32,9 +83,9 @@ TODO:
 🚧 TODO 🚧  Variants ? Global, with compact sets, etc. ? Yes: extension defs then 
 reformulation with compactly included sets.
 
-## Stability & Legacy Definitions
+# Stability & Legacy Definitions, Equivalence
 
-### Definition. Stability {.definition}
+### Stability {.definition}
 🚧 TODO 🚧 
 
 --------------------------------------------------------------------------------
@@ -52,28 +103,48 @@ Attractivity + Stability $\Leftrightarrow$ Asymptotic Stability
 ### Proof. {.proof}
 Obvious (by design).
 
-### Lemma. A.S. $\Rightarrow$ S.
+### Lemma. Asymptotic Stability implies Stability.
 
 ### Proof. {.proof}
-Let $r_1 > 0$ be a radius such that the closed ball 
-$$
-B_1 := \{x \in \mathbb{R}^n \; | \; \|x - x_e\| \leq r_1 \}
-$$ 
+
+Let's assume that the system is asymptotically stable.
+Let $r_1 > 0$ such that the closed ball $B_1$ of radius $r_1$ centered at $x_e$ 
 is included in $\mathrm{dom} \, f$.
-Since is the system is asymptotically stable, there is a $\tau \geq 0$
-such that for any $t \geq \tau$, we have $x(t, B) \subset B.$
-
-Since the system is well-posed, there is a radius $r_2 > 0$ 
--- that we can select smaller or equal to $r_1$ -- such that for any
-$x_0$ in the closed ball $B_2$ of radius $r_2$ centered on $x_e$ 
-and any $t \in [0, \tau]$,
 $$
-\|x(x_0, t) - x_e\|  = \|x(x_0, t) - x(x_e, t) \| \leq r_1,
-$$
-which means that for any $t \in [0, \tau]$, $x(t, B_2) \subset B_1$.
+B_1 := \{x \in \mathbb{R}^n \; | \; \|x - x_e\| \leq r_1 \} \subset \mathrm{dom} \, f.
+$$ 
 
-Consequently, for any $t \in \left[0, \right[ = [0, \tau] \cup \left[\tau , +\infty\right[$,
-we have $x(t, B_2) \subset B_1$ and the system is stable.
+It is bounded, its closure is included in $\mathrm{dom} \, f$ and it is also 
+a neighbourhood of $x_e$. Since the the system is asymptotically stable,
+$x(t, B_1)$ is defined for any $t\geq 0$
+and there is a $\tau \geq 0$ such that for any $t \geq \tau$, 
+the image of $B_1$ by $x(t, \cdot)$ is included in itself
+$$
+t\geq \tau \, \Rightarrow \, x(t, B_1) \subset B_1.
+$$
+
+Additionally, the system is well-posed, hence there is a $r_2 > 0$ 
+such that for any $x_0$ in the closed ball $B_2$ of radius $r_2$ 
+centered at $x_e$ is included in $\mathrm{dom} \, f$ and any $t \in [0, \tau]$,
+we have $\|x(x_0, t) - x(x_e, t) \| \leq r_1.$
+Since $x_e$ is an equilibrium, $x(t, x_e) = x_e$, thus
+$\|x(x_0, t) - x_e \| \leq r_1.$ Equivalently, 
+$$
+0\leq t \leq \tau \, \Rightarrow \, x(t, B_2) \subset B_1.
+$$
+
+Note that since $x(0, B_2) = B_2$, this inclusion yields $B_2 \subset B_1$.
+Thus, for any $t \geq 0$, either $t\in [0, \tau]$
+and $x(t, B_2) \subset B_1$, or $t\geq \tau$ and 
+since $B_2 \subset B_1$, we have $x(t, B_2) \subset x(t, B_1) \subset B_1$.
+
+To summarize our findings: we have established that for any $r_1 > 0$ 
+such that $B_1 \subset \mathrm{dom} \, f$
+there is a $r_2 > 0$ such that
+$$
+t\geq 0 \, \Rightarrow x(t, B_2) \subset B_1.
+$$ 
+Therefore that the system is stable.
 
 ### Lemma. A. + S. $\Rightarrow$ A.S.
 
@@ -132,14 +203,3 @@ $$
 then $\|x(t, x_0) - x_e\| \leq r_1$. Thus, the equilbrium is asymptotically
 stable.
 
-
-## Examples
-
-
-## Sandbox
-
-Math  test: $a=1$
-
-$$
-\int_0^1 f(x)\, dx
-$$
