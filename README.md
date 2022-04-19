@@ -3,6 +3,8 @@
 
 🚧 **Work in progress** 🚧
 
+### Read
+
 📖 [Asymptotic Stability for Humans](https://boisgera.github.io/ash/)
 
 
@@ -16,7 +18,5 @@ $ conda activate ash
 $ cd python && python vinograd.py && cd ..
 $ ./build.sh
 ```
-
---------------------------------------------------------------------------------
 
 ©️ 2022, Sébastien Boisgérault, [License CC BY 4.0](LICENSE.txt).
