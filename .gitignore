@@ -1,6 +1,5 @@
 # Generated
-doc.html
-doc.pdf
+*.html
 *.mp4
 
 # Cache
