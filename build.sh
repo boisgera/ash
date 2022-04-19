@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-pandoc --standalone \
+pandoc \
+  --standalone \
+  --toc --toc-depth=2 \
   --mathjax \
   --css css/style.css \
   --include-in-header html/font.html \

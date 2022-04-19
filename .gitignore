@@ -1,3 +1,7 @@
 # Generated
 doc.html
 doc.pdf
+*.mp4
+
+# Cache
+__pycache__
