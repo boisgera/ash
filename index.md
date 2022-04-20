@@ -54,7 +54,7 @@ $$
 When we wish to emphasize the role of the initial state $x_0$, we denote
 the solution $x(t, x_0)$ ; we also denote $x(t, X_0)$ the set
 $$
-x(t, X_0) := \{x(t, x_0) \; | x_0 \in X_0\}.
+x(t, X_0) := \{x(t, x_0) \; | \; x_0 \in X_0\}.
 $$ 
 
 🚧 **TODO** 🚧 : define **flow**, image by the flow, etc.
