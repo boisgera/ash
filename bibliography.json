@@ -1,0 +1,22 @@
+[
+	{
+		"id": "Kur66",
+		"type": "article",
+		"language": "English",
+		"note": "Published: New York-London: Academic Press; Warszawa: PWN-Polish Scientific Publishers. XX, 560 p. (1966).",
+		"title": "Topology. Vol. I. New edition, revised and augmented",
+		"author": [
+			{
+				"family": "Kuratowski",
+				"given": "K."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1966"
+				]
+			]
+		}
+	}
+]

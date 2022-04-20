@@ -2,7 +2,7 @@
 title: Asymptotic Stability for Humans
 author: 
 - "[Sébastien Boisgérault](mailto:Sebastien.Boisgerault@minesparis.psl.eu), MINES Paris, PSL University"
-date: "Tue, 19 Apr 2022 09:58:16 +0200"
+date: "Wed, 20 Apr 2022 12:47:09 +0200"
 ---
 
 ```{=html}
@@ -24,11 +24,14 @@ details h1, details h2, details h3{
 
 ### Vector Field {.definition} 
 An **(autonomous) vector field** is a $\mathbb{R}^n$-valued function $f$ 
-defined on an open subset of $\mathbb{R}^n$ (for some natural number $n$):
+whose domain $\mathrm{dom} \, f$ is an open subset $U$ of $\mathbb{R}^n$ 
+(for some natural number $n$):
 $$
 f: U \subset \mathbb{R}^n \to \mathbb{R}^n,
 \qquad \partial U \cap U= \varnothing. 
 $$
+
+
 
 ### Dynamical System {.definition}
 A vector field defines a unique **(autonomous) dynamical system** denoted 
@@ -125,11 +128,13 @@ $$
 
 ### Hausdorff Distance {.definition}
 The **Hausdorff distance** between two sets $A$ and $B$ of $\mathbb{R}^n$ is
+defined as
 $$ 
 d_H(A, B) := \max \left\{ \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b) \right\}.
 $$
-We say that a time-dependent set $A(t)$, $t\geq 0$, tends to the set $B$ when 
-$t$ tends to $+\infty$, a statement that we denote
+(see e.g. @Kur66, p. 214). 
+A time-dependent set $A(t)$ tends to a set $B$ when $t$ tends to $+\infty$, 
+noted
 $$
 \lim_{t \to +\infty} A(t) = B,
 $$
@@ -152,7 +157,7 @@ $$
 ### Compactness
 
 A set $A$ of $\mathbb{R}^n$ is **compactly included** in a set $B$ of $\mathbb{R}^n$,
-denoted $A \Subset B$, if $A$ is bounded and its closure 
+noted $A \Subset B$, if $A$ is bounded and its closure 
 $\overline{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
 is included in $B$.
 
@@ -316,3 +321,5 @@ stable.
 ```{=html}
 </details>
 ```
+
+# References
