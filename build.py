@@ -10,8 +10,9 @@ import pandoc
 
 # Third-Party Librairies
 from bs4 import BeautifulSoup; HTML = lambda arg: BeautifulSoup(arg, "html.parser")
+import plumbum
 from plumbum import FG
-from plumbum.cmd import python
+from plumbum.cmd import date, python
 try:
     from plumbum.cmd import git
 except ImportError:
@@ -49,6 +50,8 @@ def generate_html():
 def post_process_html():
     with open("index.html", encoding="utf-8") as input:
         html = HTML(input)
+
+    # Include github link into header
     p = HTML("""
       <p>
         <span style='display:inline-block;width:1em;position:relative;margin-right:0.25em'>
@@ -63,11 +66,36 @@ def post_process_html():
         </a>
       </p>
     """)
-    html.html.body.header.append(p)
+    html.body.header.append(p)
+
+    # Include github link into header
+        
+    hash_ = git("rev-parse", "--short", "HEAD").strip()
+    p = HTML(f"""
+      <p>
+        <span style='display:inline-block;width:1em;position:relative;margin-right:0.25em'>
+          <img 
+            style='position:relative;top:0.15em;'
+            height='auto' width='100%' 
+            src='icons/git.svg'>
+          </img>
+        </span>
+        <a 
+          href='https://github.com/boisgera/ash/commit/{hash_}'>
+          #{hash_}
+        </a>
+      </p>
+    """)
+    html.body.header.append(p)
+
+    # Set the date to now.
+    plumbum.local.env["LC_TIME"] = "en_US.utf-8" 
+    date_ = date("+%A, %d %B %Y").strip()
+    html.body.header(class_="date")[0].string = date_
+
     with open("index.html", "w", encoding="utf-8") as output:
         output.write(html.prettify())
-    # if git:
-    #     hash_ = git("rev-parse", "--short", "HEAD").strip()
+
 
 
 def main(
