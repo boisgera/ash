@@ -24,7 +24,7 @@ jobs:
         run: ffmpeg -version
 
       - name: HTML & Assets Build
-        run: python build.py
+        run: python build.py --all
 
       - name: Deployment Setup
         run: rm .gitignore
