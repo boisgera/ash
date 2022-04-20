@@ -3,6 +3,7 @@ import numpy as np
 import scipy.integrate as sci
 import matplotlib.pyplot as plt
 import matplotlib.animation as ani
+import tqdm
 
 
 def solve(**kwargs):
@@ -85,7 +86,7 @@ def get_data(results, t):
     return data
 
 
-def generate_movie(data, filename, fps, axes=None):
+def generate_movie(data, filename, fps, dpi=300, axes=None):
     fig = None
     if axes:
         fig = axes.get_figure()
@@ -129,4 +130,6 @@ def generate_movie(data, filename, fps, axes=None):
 
     writer = ani.FFMpegWriter(fps=fps)
     animation = ani.FuncAnimation(fig, func=update, frames=len(data))
-    animation.save(filename, writer=writer, dpi=100)
+    bar = tqdm.tqdm(total=len(data))
+    animation.save(filename, writer=writer, dpi=dpi, progress_callback=lambda i, n: bar.update(1))
+    bar.close()

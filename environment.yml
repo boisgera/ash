@@ -6,7 +6,9 @@ dependencies:
   - pip
   - black
   - plumbum
+  - tqdm
   - typer
+  - beautifulsoup4
   - numpy
   - scipy
   - autograd

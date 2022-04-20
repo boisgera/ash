@@ -11,6 +11,10 @@ import pandoc
 # Third-Party Librairies
 from plumbum import FG
 from plumbum.cmd import python
+try:
+    from plumbum.cmd import git
+except ImportError:
+    git = None
 import typer
 
 options = [
@@ -31,8 +35,8 @@ options = [
 def generate_videos():
     cwd = Path.cwd()
     try:
-        os.chdir(cwd / "python")
-        python["vinograd.py"] & FG
+        os.chdir(cwd / "videos")
+        python["main.py"] & FG
     finally:
         os.chdir(cwd)
 
@@ -41,6 +45,10 @@ def generate_html():
     doc = pandoc.read(file="index.md")
     pandoc.write(doc, file="index.html", options=options)
 
+def post_process_html():
+    if git:
+        hash_ = git("rev-parse", "--short", "HEAD").strip()
+
 
 def main(
     all: bool = typer.Option(False, help="Generate all assets."),
@@ -48,6 +56,8 @@ def main(
     if all:
         generate_videos()
     generate_html()
+    post_process_html()
+
 
 
 if __name__ == "__main__":

@@ -101,7 +101,7 @@ $\dot{x} = f(x)$, $x(0) = x_*$.
 We clearly have:
 
 ### Equilibrium {.proposition}
-A state $x_*$ of of a dynamical system $\dot{x} = f(x)$ is an equilibrium
+A state $x_*$ of a dynamical system $\dot{x} = f(x)$ is an equilibrium
 if and only if $f(x_*) = 0$.
 
 ### Attractivity {.definition}
@@ -112,6 +112,13 @@ $$
 \forall \, x_0 \in \mathrm{dom} \, f, \;
 \lim_{t \to +\infty} x(t, x_0) = x_*.
 $$
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/attractivity.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
 
 # A Better Concept
 

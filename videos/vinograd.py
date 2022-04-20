@@ -6,9 +6,24 @@ pass
 # Third-Party Libraries
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.colors import to_rgb
+
 
 # Local Library
 import mivp
+
+
+# ------------------------------------------------------------------------------
+grey_4 = to_rgb("#ced4da")
+
+# ------------------------------------------------------------------------------
+
+def Q(f, xs, ys):
+    X, Y = np.meshgrid(xs, ys)
+    v = np.vectorize
+    fx = v(lambda x, y: f([x, y])[0])
+    fy = v(lambda x, y: f([x, y])[1])
+    return X, Y, fx(X, Y), fy(X, Y)
 
 # ------------------------------------------------------------------------------
 
@@ -58,6 +73,14 @@ atol = 1e-12  # default: 1e-6
 
 # ------------------------------------------------------------------------------
 
+fig = plt.figure()
+x = y = np.linspace(-1.0, 1.0, 1000)
+plt.streamplot(*Q(lambda xy: fun(0, xy), x, y), color=grey_4, zorder=-100)
+#plt.plot([0], [0], lw=3.0, marker="o", ms=10.0, markevery=[-1],
+#        markeredgecolor="white", color=grey_4)
+plt.axis("square")
+plt.axis("off")
+
 data = mivp.solve_alt(
     fun=fun,
     t_eval=t,
@@ -69,4 +92,4 @@ data = mivp.solve_alt(
     method="LSODA",
 )
 
-mivp.generate_movie(data, filename="../videos/vinograd.mp4", fps=df)
+mivp.generate_movie(data, filename="vinograd.mp4", axes=fig.axes[0], fps=df)
