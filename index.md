@@ -278,7 +278,7 @@ An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
 asymptotically stable** if for any state $x_0$ there is a (small enough) 
 closed ball of states of positive radius $r$ centered at $x_0$ 
 $$
-\\bar{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
+\bar{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
 $$ 
 whose image by the flow at time $t$ (exists for every $t\geq 0$ and) 
 tends to $\{x_*\}$ as $t$ tends to $+\infty$.
@@ -292,13 +292,13 @@ $$
 
 A set $A$ of $\mathbb{R}^n$ is **compactly included** in a set $B$ of $\mathbb{R}^n$,
 noted $A \Subset B$, if $A$ is bounded and its closure 
-$bar{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
+$\bar{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
 is included in $B$.
 
 
 ### Proposition. Asymptotic Stability {.proposition}
-An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
-asymptotically stable** if and only if the image of any set of states 
+An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is (globally)
+asymptotically stable if and only if the image of any set of states 
 compactly included in $\mathrm{dom} \, f$ by the flow at time $t$
 (exists for every $t\geq 0$ and) tends to $\{x_*\}$ as $t$ tends to $+\infty$.
 $$
@@ -353,16 +353,17 @@ The origin is an asymptotically stable equilibrium of the system
 $$
 \dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2)
 $$
-Indeed, the closed-form of the solutions \eqref{LTI-solutions} shows that for any
+Indeed, the closed-form solution \eqref{LTI-solutions} yields
 $$
-\|x(t)\| \leq \|x_0\| e^{-t}
+\|x(t, x_0)\| \leq 2 \|x_0\| e^{-t}.
 $$
-thus for any bounded set of states $X_0$, such that $\sup_{x_0 \in X_0} \|x_0\| \leq M$,
-we have 
+A set $X_0$ is compactly included in $\mathbb{R}^n$ if and only if it
+is a bounded subset of $\mathbb{R}^n$. For any such set,
 $$
-d_h(x(t, X_0), \{(0, 0)\}) \leq 2 M  e^{-t}.
+d_H(x(t, X_0), 0\}) \leq 2 \sup_{x_0 \in X_0} \|x_0\| e^{-t}.
 $$
-Hence the system is asymptotically stable.
+Hence $x(t, X_0) \to \{0\}$ when $t \to +\infty$:
+the origin is asymptotically stable.
 
 
 ```{=html}
