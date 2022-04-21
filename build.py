@@ -100,6 +100,18 @@ def post_process_html():
     date_ = date("+%A, %d %B %Y").strip()
     html.body.header(class_="date")[0].string = date_
 
+    # Pimp the table of contents
+    nav = html.body.nav
+    toc = HTML("""
+      <details>
+        <summary>
+          <h2>Contents</h2>
+        </summary>
+      </details>
+    """)
+    toc.details.append(nav)
+    html.body.header.insert_after(toc)
+
     with open("index.html", "w", encoding="utf-8") as output:
         output.write(html.prettify())
 

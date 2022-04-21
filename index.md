@@ -13,6 +13,35 @@ details h1, details h2, details h3{
 </style>
 ```
 
+```{=html}
+<style>
+details summary {
+  cursor: pointer;
+  list-style: '🔒 ';
+}
+
+details[open] summary {
+  cursor: pointer;
+  list-style: '🔓 ';
+}
+
+summary::-webkit-details-marker {
+  display: none
+}
+
+
+
+
+details[open] summary ~ * {
+  animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+  0%    {opacity: 0}
+  100%  {opacity: 1}
+}
+</style>
+```
+
 
 
 ## Introduction
