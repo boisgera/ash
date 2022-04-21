@@ -196,8 +196,17 @@ $$
 $$
 whenever $\lim_{t \to +\infty} d_H(A(t), B) = 0.$
 
+
+
 🚧 **TODO** 🚧 : drawing and explanation. General case or singleton case only?
 (or both?)
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/hausdorff.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
 
 When $B$ is a singleton $\{b_*\}$, we have 
 $$
@@ -209,6 +218,8 @@ thus
 $$
 d_H(A, \{b_*\}) = \sup_{a \in A} d(a, b_*).
 $$
+
+
 
 ### Asymptotic Stability {.definition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)

@@ -30,9 +30,8 @@ def Q(f, xs, ys):
 # Vector field
 def fun(t, xy):
     x, y = xy
-    q = x**2 + y**2 * (1 + (x**2 + y**2) ** 2)
-    dx = (x**2 * (y - x) + y**5) / q
-    dy = y**2 * (y - 2 * x) / q
+    dx = - y + 0.5*np.cos(0.5*t)
+    dy = x - np.sin(0.5*t) 
     return [dx, dy]
 
 
@@ -75,16 +74,17 @@ atol = 1e-12  # default: 1e-6
 
 fig = plt.figure()
 x = y = np.linspace(-1.0, 1.0, 1000)
-plt.streamplot(*Q(lambda xy: fun(0, xy), x, y), color=grey_4, zorder=-100)
-#plt.plot([0], [0], lw=3.0, marker="o", ms=10.0, markevery=[-1],
-#        markeredgecolor="white", color=grey_4)
+#plt.streamplot(*Q(lambda xy: fun(0, xy), x, y), color=grey_4, zorder=-100)
+c = cx, cy = np.array([0.0, 0.0])
+plt.plot([cx], [cy], lw=3.0, marker="o", ms=10.0, markevery=[-1],
+        markeredgecolor="white", color="black")
 plt.axis("square")
 plt.axis("off")
 
 data = mivp.solve_alt(
     fun=fun,
     t_eval=t,
-    boundary=boundary,
+    boundary=lambda s: 0.5*boundary(s),
     boundary_rtol=0.0,
     boundary_atol=0.05,
     rtol=rtol,
@@ -92,4 +92,21 @@ data = mivp.solve_alt(
     method="LSODA",
 )
 
-mivp.generate_movie(data, filename="vinograd.mp4", axes=fig.axes[0], fps=df)
+circle = None
+
+def display_radius(i, axes):
+    global circle
+    if circle:
+        circle.remove()
+    x, y = data[i]
+    r = max(np.sqrt((x - cx)**2 + (y - cy)**2))
+    theta = np.linspace(0, 2*np.pi, 1000)
+    circle = axes.plot(
+        cx+r*np.cos(theta), cy+r*np.sin(theta), 
+        linestyle='dashed', color="k", linewidth=1.0,
+        )[0]
+    plt.axis([-4/3, 4/3, -1, 1])
+
+
+
+mivp.generate_movie(data, filename="hausdorff.mp4", axes=fig.axes[0], fps=df, hook=display_radius)

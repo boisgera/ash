@@ -14,4 +14,5 @@ from plumbum.cmd import python
 
 
 python["attractivity.py"] & FG
+python["hausdorff.py"] & FG
 python["vinograd.py"] & FG
