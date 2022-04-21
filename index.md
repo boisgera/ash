@@ -13,12 +13,64 @@ details h1, details h2, details h3{
 </style>
 ```
 
-## Intro, Motivation, Intro, references, didactic choices
 
-🚧 **TODO** 🚧
 
-  - "classic" definitions, what is hard, what is (the most) important, 
-    why we can/shall do better. Explain & advocate.
+## Introduction
+
+Asymptotic stability is a cornerstone of control theory and engineering.
+There is little doubt in my opinion that if only one notion among stability,
+attractivity and asymptotic stability, should be taught to control engineers,
+it should be asymptotic stability. 
+Therefore, asymptotic stability, not attractivity nor stability, 
+should be the only focus of time and complexity-bound control engineering lectures.
+As heartbreaking as this conclusion can be, most experienced lecturers know that 
+chosing means eliminating (or for French readers, "choisir, c'est renoncer"[^1]). 
+
+[^1]: > L’erreur de ma vie fut dès lors de ne continuer longtemps aucune étude, 
+> pour n’avoir su prendre mon parti de renoncer à beaucoup d’autres. 
+> --- N'importe quoi s’achetait trop cher à ce prix-là, 
+> et les raisonnements ne pouvaient venir à bout de ma détresse. 
+> Entrer dans un marché de délices, en ne disposant (grâce à Qui ?) 
+> que d’une somme trop minime ; en disposer ! 
+> **Choisir, c'était renoncer pour toujours, pour jamais, à tout le reste** --- 
+> et la quantité nombreuse de ce reste demeurait préférable à n'importe quelle unité. 
+>
+> *André Gide, Les nourritures terrestres*
+
+However, the classic approach introduces asymptotic stability as a 
+strengthening of the concept of stability,
+with a composite definition that required stability and attractivity.
+It has several didactic drawbacks:
+
+  - It requires to understand the concept of stability, which is arguably hard
+    (at the very least much harder than attractivity).
+    Using it as a foundation to define asymptotic stability makes automatically
+    asymptotic stability at least equally as hard.
+
+  - Using a composite definition for asymptotic stability makes it a derived
+    concept, which appears as a second-class citizen of control theory 
+    instead of the first-class citizen that it should be.
+
+  - This definition fails to address in simple terms what are in my opinion
+    the shortcoming of the concept of attractivity and why it needs to be strengthened:
+    a catastrophic failure to ensure a common speed of convergence, 
+    even for arbitrary close initial states.
+
+In this document we follow a different path: we introduce attractivity, expose
+it shortcomings, then introduce a definition of asymptotic stability as an
+independent concept which is
+
+  - an obvious strenghtening of attractivity (and clearly solves its issues),
+
+  - of reasonable complexity (harder than attractivity, but simpler than stability),
+
+  - equivalent to the classic definition.
+
+To the best of my knowledge, my definition is original,
+but I have not performed an extensive research on this subject. Suffice to
+say that I have never been exposed to it in my earlier studes;
+if the concept is not new (I seriously doubt it is) at the very least it is
+not in my opinion popular enough given its didactic potential.
 
 # Definitions & Notations
 
