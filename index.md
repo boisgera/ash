@@ -44,7 +44,7 @@ details[open] summary ~ * {
 
 
 
-## Introduction
+# Introduction
 
 Asymptotic stability is a cornerstone of control theory and engineering.
 There is little doubt in my opinion that if only one notion among stability,
@@ -103,7 +103,7 @@ not in my opinion popular enough given its didactic potential.
 
 🚧 **TODO:** 🚧 explain document meant for lecturers, not students.
 Relate this to its organisation (relatively standalone, level of
-details, videos, etc.).
+details, videos, extra work to adapt, not "off-the-shelf" use, etc.).
 
 # Definitions & Notations
 
@@ -150,32 +150,21 @@ $$
 A solution of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is **maximal**
 if no other solution is a strict extension of it.
 
-🚧 **TODO:** 🚧 assume existence and uniqueness of a maximal solution to simplify
-the definition of continuous dependance on the initial state. Shall we merge this
-into the well-posedness definition then?
 
-### Continuous Dependance on the Initial State {.definition}
-A system $\dot{x} = f(x)$ is **continuous dependant on the initial state at 
-state $x_0$** 
-if for any
-solution $x$ defined on $\left[0,\tau\right[$ such that $x(0)= x_0$,
-any $0 < \tau' < \tau$ and $r < d(x_0, \mathbb{R}^n \setminus \mathrm{dom} \, f)$,
-there is a $r' > 0$ such that for any $x_0'$ such that $\|x'_0 - x_0\| \leq r'$, 
-there is a solution $x': \left[0, \tau'\right[$ such that $x'(0) = x'_0$ and
-$$
-\forall 0 \leq t < \tau', \; \|x'(t) - x(t)\| < r.
-$$
-It is **continuously dependant on the initial state** if it is 
-continuously dependant on the state at each state.
 
 ### Well-Posed System {.definition}
 A dynamical system $\dot{x} = f(x)$ is **well-posed** if for any initial state 
-the corresponding IVP has a unique maximal solution $x$
-which depends continuously on the initial state:
+the corresponding IVP has a unique maximal solution $x$ which 
+**depends continuously on the initial state**: if $x(t, x_0)$ is defined on $[0, \tau]$, 
+then for $x_0'$ close enough to $x_0$, 
+$x(t, x'_0)$ is also defined on $[0, \tau]$ and
+$$
+\lim_{x_0' \to x_0} \left[\max_{t \in [0, \tau]} \|x(t, x'_0) - x(t, x_0)\|\right] = 0.
+$$
 
 
 
-## Asymptotic Concepts
+# Attractivity
 
 
 ### Equilibrium {.definition}
@@ -194,6 +183,47 @@ $$
 \lim_{t \to +\infty} x(t, x_0) = x_*.
 $$
 
+### Example 1 -- Attractivity {.example}
+The time-invariant system
+\begin{equation}
+\dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2) \label{LTI}
+\end{equation}
+has a single equilibrium $x_* = (0, 0)$. The auxiliary variables 
+$y^1:= x^1+x^2$ and $y^2:=x^1 - x^2$ satisfy the decoupled differential equations
+$\dot{y}^1 = -y^1$ and $\dot{y}^2 = -3 y^2$,
+the solution associated to an initial state $x_0 = (x_0^1, x_0^2)$ is
+$$
+y^1(t) = (x_0^1 + x_0^2)e^{-t}, \;
+y^2(t) = (x_0^1 - x_0^2)e^{-3t}
+$$
+and thus
+\begin{equation}
+\left[
+  \begin{array}{c}
+  x^1 \\
+  x^2
+  \end{array}
+\right](t)
+= 1/2 \left[
+  \begin{array}{c}
+  x_0^1 + x_0^2 \\
+  x_0^1 + x_0^2
+  \end{array}
+\right]e^{-t}
++  1/2 \left[
+  \begin{array}{c}
+  x_0^1 - x_0^2 \\
+  x_0^2 - x_0^1
+  \end{array}
+\right]e^{-3t}.
+\label{LTI-solutions}
+\end{equation}
+It is therefore clear that for every initial state $x_0$, we have
+$$
+\lim_{t \to +\infty} x(t, x_0) = x_*. 
+$$
+Hence, the equilibrium is attractive.
+
 ```{=html}
 <video controls style="width:100%;">
   <source src="videos/attractivity.mp4" type="video/mp4">
@@ -201,18 +231,11 @@ $$
 </video> 
 ```
 
-# A Better Concept
+# Limitations
 
-## Issues with attractivity
 
-```{=html}
-<video controls style="width:100%;">
-  <source src="videos/vinograd.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video> 
-```
 
-## Asymptotic Stability
+# Asymptotic Stability
 
 ### Hausdorff Distance {.definition}
 The **Hausdorff distance** between two sets $A$ and $B$ of $\mathbb{R}^n$ is
@@ -230,15 +253,6 @@ whenever $\lim_{t \to +\infty} d_H(A(t), B) = 0.$
 
 
 
-🚧 **TODO** 🚧 : drawing and explanation. General case or singleton case only?
-(or both?)
-
-```{=html}
-<video controls style="width:100%;">
-  <source src="videos/hausdorff.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video> 
-```
 
 When $B$ is a singleton $\{b_*\}$, we have 
 $$
@@ -251,6 +265,12 @@ $$
 d_H(A, \{b_*\}) = \sup_{a \in A} d(a, b_*).
 $$
 
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/hausdorff.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
 
 
 ### Asymptotic Stability {.definition}
@@ -258,14 +278,14 @@ An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
 asymptotically stable** if for any state $x_0$ there is a (small enough) 
 closed ball of states of positive radius $r$ centered at $x_0$ 
 $$
-B(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
+\overline{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
 $$ 
 whose image by the flow at time $t$ (exists for every $t\geq 0$ and) 
 tends to $\{x_*\}$ as $t$ tends to $+\infty$.
 $$
 \forall \, x_0 \in \mathrm{dom} \, f, \;
 \exists \, r > 0, \; 
-\lim_{t \to +\infty} x(t, B(x_0, r)) = \{x_*\}.
+\lim_{t \to +\infty} x(t, \overline{B}(x_0, r)) = \{x_*\}.
 $$
 
 ### Compactness
@@ -293,10 +313,70 @@ $$
   </summary>
 ```
 
-🚧 **TODO** 🚧 
+Since a closed ball of states is compactly included in $\mathrm{dom} \, f$,
+the above criteria clearly implies asymptotic stability.
+
+Conversly, let $X_0$ be a set compactly included in $\mathrm{dom} \, f$.
+For every $x_0 \in \overline{X_0},$ there is a positive radius $r(x_0)$ such that
+$$
+\lim_{t \to +\infty} x(t, \bar{B}(x_0, r(x_0))) = \{x_*\}.
+$$
+The collection of all open balls 
+$B(x_0, r(x_0))$, when $x_0 \in \overline{X_0}$
+is an open cover of the compact set $\overline{X_0}$, thus there is a finite
+sub-collection $B_1$, $B_2$, $\dots$, $B_p$ such that 
+$$
+\overline{X_0} \subset B_1 \cup B_2 \cup \dots \cup B_p.
+$$
+Since for any $k=1,\dots, p$, we have 
+$\lim_{t \to +\infty} x(t, B_k) = \{x_*\}$, we have
+$$
+\lim_{t \to +\infty} d_H(B_k, \{x_*\}) \to 0.
+$$
+Since $X_0 \subset \overline{X_0} \subset B_1 \cup B_2 \cup \dots \cup B_p$,
+$$
+d_H(X_0, \{x_*\}) \leq d_H(\overline{X_0}, \{x_*\})
+\leq \max_{k=1...p} d_H(B_k, \{x_*\})
+$$
+and thus
+$$
+\lim_{t \to +\infty} d_H(X_0, \{x_*\}) \to 0.
+$$
 
 ```{=html}
 </details>
+```
+
+### Examples
+
+The origin is an asymptotically stable equilibrium of the system
+$$
+\dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2)
+$$
+Indeed, the closed-form of the solutions \eqref{LTI-solutions} shows that for any
+$$
+\|x(t)\| \leq \|x_0\| e^{-t}
+$$
+thus for any bounded set of states $X_0$, such that $\sup_{x_0 \in X_0} \|x_0\| \leq M$,
+we have 
+$$
+d_h(x(t, X_0), \{(0, 0)\}) \leq 2 M  e^{-t}.
+$$
+Hence the system is asymptotically stable.
+
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/asymptotic-stability.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/vinograd.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
 ```
 
 # Stability & Legacy Definitions, Equivalence

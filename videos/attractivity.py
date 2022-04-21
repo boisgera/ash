@@ -36,8 +36,8 @@ dt = 1.0 / df
 t_span = t_i, t_f = (0.0, 5.0)
 t = np.arange(t_i, t_f + dt, dt)
 
-y0s = [[-4.0, 1.0], [4.0, -1.0]]
-colors = [good, good]
+y0s = [[-4.0, 1.0], [4.0, -1.0], [1.0, 4.0], [-1.0, -4.0]]
+colors = [good, good, good, good]
 xys = []
 for y0 in tqdm(y0s):
     r = solve_ivp(fun=ft, y0=y0, t_span=t_span, t_eval=t)

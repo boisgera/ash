@@ -100,6 +100,17 @@ def post_process_html():
     date_ = date("+%A, %d %B %Y").strip()
     html.body.header(class_="date")[0].string = date_
 
+    # Enable Mathjax Equation Numbers (and label + eqref)
+    html.head.insert(0,HTML("""
+      <script>
+        window.MathJax = {
+          tex: {
+            tags: 'ams'
+          }
+        };
+       </script>
+    """))
+
     # Pimp the table of contents
     nav = html.body.nav
     toc = HTML("""
