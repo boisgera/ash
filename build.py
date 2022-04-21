@@ -33,6 +33,13 @@ options = [
     "--metadata=link-citations:true",
 ]
 
+def generate_images():
+    cwd = Path.cwd()
+    try:
+        os.chdir(cwd / "images")
+        python["main.py"] & FG
+    finally:
+        os.chdir(cwd)
 
 def generate_videos():
     cwd = Path.cwd()
@@ -102,6 +109,7 @@ def main(
     all: bool = typer.Option(False, help="Generate all assets."),
 ):
     if all:
+        generate_images()
         generate_videos()
     generate_html()
     post_process_html()

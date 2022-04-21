@@ -86,7 +86,7 @@ def get_data(results, t):
     return data
 
 
-def generate_movie(data, filename, fps, dpi=300, axes=None):
+def generate_movie(data, filename, fps, dpi=300, axes=None, hook=None):
     fig = None
     if axes:
         fig = axes.get_figure()
@@ -127,6 +127,9 @@ def generate_movie(data, filename, fps, dpi=300, axes=None):
         if polygon:
             polygon.remove()
         polygon = axes.fill(x, y, color="k")[0]
+        if hook:
+            hook(i, axes)
+
 
     writer = ani.FFMpegWriter(fps=fps)
     animation = ani.FuncAnimation(fig, func=update, frames=len(data))

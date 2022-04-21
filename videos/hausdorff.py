@@ -92,18 +92,4 @@ data = mivp.solve_alt(
     method="LSODA",
 )
 
-circle = None
-
-def display_radius(i, axes):
-    global circle
-    if circle:
-        circle.remove()
-    x, y = data[i]
-    r = max(np.sqrt(x*x + y*y))
-    theta = np.linspace(0, 2*np.pi, 1000)
-    circle = axes.plot(
-        r*np.cos(theta), r*np.sin(theta), 
-        linestyle='dashed', color="k", linewidth=1.0,
-        )[0]
-
-mivp.generate_movie(data, filename="vinograd.mp4", axes=fig.axes[0], fps=df, hook=display_radius)
+mivp.generate_movie(data, filename="vinograd.mp4", axes=fig.axes[0], fps=df)

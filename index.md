@@ -72,6 +72,8 @@ say that I have never been exposed to it in my earlier studes;
 if the concept is not new (I seriously doubt it is) at the very least it is
 not in my opinion popular enough given its didactic potential.
 
+🚧 **TODO:** 🚧 explain document meant for lecturers, not students.
+
 # Definitions & Notations
 
 ### Vector Field {.definition} 
@@ -207,10 +209,6 @@ thus
 $$
 d_H(A, \{b_*\}) = \sup_{a \in A} d(a, b_*).
 $$
-
-### Asympt. Stab.
-
-🚧 **TODO:** without compactness first 🚧 
 
 ### Asymptotic Stability {.definition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
