@@ -24,7 +24,7 @@ it should be asymptotic stability.
 Therefore, asymptotic stability, not attractivity nor stability, 
 should be the only focus of time and complexity-bound control engineering lectures.
 As heartbreaking as this conclusion can be, most experienced lecturers know that 
-chosing means eliminating (or for French readers, "choisir, c'est renoncer"[^1]). 
+chosing means eliminating ("choisir, c'est renoncer"[^1]). 
 
 [^1]: > L’erreur de ma vie fut dès lors de ne continuer longtemps aucune étude, 
 > pour n’avoir su prendre mon parti de renoncer à beaucoup d’autres. 
@@ -104,13 +104,14 @@ $$
 x(t) = x_0 + \int_0^t f(x(s)) \, ds, \qquad 0 \leq t < \tau.
 $$
 When we wish to emphasize the role of the initial state $x_0$, we denote
-the solution $x(t, x_0)$ ; we also denote $x(t, X_0)$ the set
+the solution $x(t, x_0)$ and then call the application $x$ the **flow** 
+of the dynamical system. 
+We also consider solutions associated
+with a set $X_0 \subset \mathrm{dom} \, f$ of initial states: 
+we denote $x(t, X_0)$ the image of $X_0$ by the flow at time $t$:
 $$
 x(t, X_0) := \{x(t, x_0) \; | \; x_0 \in X_0\}.
 $$ 
-
-🚧 **TODO** 🚧 : define **flow**, image by the flow, etc.
-
 
 ### Maximal Solutions {.definition}
 A solution of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is **maximal**
@@ -142,19 +143,13 @@ which depends continuously on the initial state.
 
 ## Asymptotic Concepts
 
-From now on, we assume that all systems are well-posed.
-
 
 ### Equilibrium {.definition}
 An **equilibrium** $x_*$ of a dynamical system $\dot{x} = f(x)$ is a state such
 that $x: t \in \left[0, +\infty\right[ \to x_*$ is a solution of 
 $\dot{x} = f(x)$, $x(0) = x_*$.
 
-We clearly have:
-
-### Equilibrium {.proposition}
-A state $x_*$ of a dynamical system $\dot{x} = f(x)$ is an equilibrium
-if and only if $f(x_*) = 0$.
+Equivalently, a state $x_*$ is an equilibrium if and only if $f(x_*) = 0$.
 
 ### Attractivity {.definition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally) attractive**
@@ -213,6 +208,25 @@ $$
 d_H(A, \{b_*\}) = \sup_{a \in A} d(a, b_*).
 $$
 
+### Asympt. Stab.
+
+🚧 **TODO:** without compactness first 🚧 
+
+### Asymptotic Stability {.definition}
+An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
+asymptotically stable** if for any state $x_0$ there is a (small enough) 
+closed ball of states of positive radius $r$ centered at $x_0$ 
+$$
+B(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
+$$ 
+whose image by the flow at time $t$ (exists for every $t\geq 0$ and) 
+tends to $\{x_*\}$ as $t$ tends to $+\infty$.
+$$
+\forall \, x_0 \in \mathrm{dom} \, f, \;
+\exists \, r > 0, \; 
+\lim_{t \to +\infty} x(t, B(x_0, r)) = \{x_*\}.
+$$
+
 ### Compactness
 
 A set $A$ of $\mathbb{R}^n$ is **compactly included** in a set $B$ of $\mathbb{R}^n$,
@@ -221,15 +235,28 @@ $\overline{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
 is included in $B$.
 
 
-### Asymptotic Stability {.definition}
+### Proposition. Asymptotic Stability {.proposition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
-asymptotically stable** if the image of any set of states 
+asymptotically stable** if and only if the image of any set of states 
 compactly included in $\mathrm{dom} \, f$ by the flow at time $t$
-(exists for any $t\geq 0$ and) tends to $\{x_*\}$ as $t$ tends to $+\infty$.
+(exists for every $t\geq 0$ and) tends to $\{x_*\}$ as $t$ tends to $+\infty$.
 $$
 \forall \, X_0 \Subset \mathrm{dom} \, f, \;
 \lim_{t \to +\infty} x(t, X_0) = \{x_*\}.
 $$
+
+```{=html}
+<details>
+  <summary>
+    <h3>Proof</h3>
+  </summary>
+```
+
+🚧 **TODO** 🚧 
+
+```{=html}
+</details>
+```
 
 # Stability & Legacy Definitions, Equivalence
 
