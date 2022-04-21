@@ -278,21 +278,21 @@ An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
 asymptotically stable** if for any state $x_0$ there is a (small enough) 
 closed ball of states of positive radius $r$ centered at $x_0$ 
 $$
-\overline{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
+\\bar{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
 $$ 
 whose image by the flow at time $t$ (exists for every $t\geq 0$ and) 
 tends to $\{x_*\}$ as $t$ tends to $+\infty$.
 $$
 \forall \, x_0 \in \mathrm{dom} \, f, \;
 \exists \, r > 0, \; 
-\lim_{t \to +\infty} x(t, \overline{B}(x_0, r)) = \{x_*\}.
+\lim_{t \to +\infty} x(t, \bar{B}(x_0, r)) = \{x_*\}.
 $$
 
 ### Compactness
 
 A set $A$ of $\mathbb{R}^n$ is **compactly included** in a set $B$ of $\mathbb{R}^n$,
 noted $A \Subset B$, if $A$ is bounded and its closure 
-$\overline{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
+$bar{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
 is included in $B$.
 
 
@@ -317,25 +317,25 @@ Since a closed ball of states is compactly included in $\mathrm{dom} \, f$,
 the above criteria clearly implies asymptotic stability.
 
 Conversly, let $X_0$ be a set compactly included in $\mathrm{dom} \, f$.
-For every $x_0 \in \overline{X_0},$ there is a positive radius $r(x_0)$ such that
+For every $x_0 \in \bar{X}_0,$ there is a positive radius $r(x_0)$ such that
 $$
 \lim_{t \to +\infty} x(t, \bar{B}(x_0, r(x_0))) = \{x_*\}.
 $$
 The collection of all open balls 
-$B(x_0, r(x_0))$, when $x_0 \in \overline{X_0}$
-is an open cover of the compact set $\overline{X_0}$, thus there is a finite
+$B(x_0, r(x_0))$, when $x_0 \in \bar{X}_0$
+is an open cover of the compact set $\bar{X}_0$, thus there is a finite
 sub-collection $B_1$, $B_2$, $\dots$, $B_p$ such that 
 $$
-\overline{X_0} \subset B_1 \cup B_2 \cup \dots \cup B_p.
+\bar{X}_0 \subset B_1 \cup B_2 \cup \dots \cup B_p.
 $$
 Since for any $k=1,\dots, p$, we have 
 $\lim_{t \to +\infty} x(t, B_k) = \{x_*\}$, we have
 $$
 \lim_{t \to +\infty} d_H(B_k, \{x_*\}) \to 0.
 $$
-Since $X_0 \subset \overline{X_0} \subset B_1 \cup B_2 \cup \dots \cup B_p$,
+Since $X_0 \subset \bar{X}_0 \subset B_1 \cup B_2 \cup \dots \cup B_p$,
 $$
-d_H(X_0, \{x_*\}) \leq d_H(\overline{X_0}, \{x_*\})
+d_H(X_0, \{x_*\}) \leq d_H(\bar{X}_0, \{x_*\})
 \leq \max_{k=1...p} d_H(B_k, \{x_*\})
 $$
 and thus
