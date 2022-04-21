@@ -73,11 +73,13 @@ if the concept is not new (I seriously doubt it is) at the very least it is
 not in my opinion popular enough given its didactic potential.
 
 🚧 **TODO:** 🚧 explain document meant for lecturers, not students.
+Relate this to its organisation (relatively standalone, level of
+details, videos, etc.).
 
 # Definitions & Notations
 
 ### Vector Field {.definition} 
-An **(autonomous) vector field** is a $\mathbb{R}^n$-valued function $f$ 
+An **(time-invariant) vector field** is a $\mathbb{R}^n$-valued function $f$ 
 whose domain $\mathrm{dom} \, f$ is an open subset $U$ of $\mathbb{R}^n$ 
 (for some natural number $n$):
 $$
@@ -88,7 +90,7 @@ $$
 
 
 ### Dynamical System {.definition}
-A vector field defines a unique **(autonomous) dynamical system** denoted 
+A vector field defines a unique **(time-invariant) dynamical system** denoted 
 $\dot{x} = f(x)$. Any element of the domain of definition of $f$ is
 a **(valid) state** of the dynamical system.
 
@@ -139,8 +141,9 @@ continuously dependant on the state at each state.
 
 ### Well-Posed System {.definition}
 A dynamical system $\dot{x} = f(x)$ is **well-posed** if for any initial state 
-the corresponding IVP has a unique maximal solution
-which depends continuously on the initial state.
+the corresponding IVP has a unique maximal solution $x$
+which depends continuously on the initial state:
+
 
 
 ## Asymptotic Concepts
