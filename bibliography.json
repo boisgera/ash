@@ -66,5 +66,28 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "Isi95",
+		"type": "book",
+		"collection-title": "Communications and Control Engineering",
+		"ISBN": "978-3-540-19916-8",
+		"note": "LCCN: 95014976",
+		"publisher": "Springer London",
+		"title": "Nonlinear Control Systems",
+		"URL": "https://books.google.fr/books?id=fPGzHK\\_pto4C",
+		"author": [
+			{
+				"family": "Isidori",
+				"given": "A."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1995"
+				]
+			]
+		}
 	}
 ]
