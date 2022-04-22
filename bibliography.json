@@ -41,5 +41,30 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "Son98",
+		"type": "book",
+		"collection-title": "Texts Appl. Math.",
+		"edition": "2nd ed.",
+		"ISBN": "0-387-98489-5",
+		"language": "English",
+		"note": "ISSN: 0939-2475",
+		"publisher": "New York, NY: Springer",
+		"title": "Mathematical control theory. Deterministic finite dimensional systems.",
+		"volume": "6",
+		"author": [
+			{
+				"family": "Sontag",
+				"given": "Eduardo D."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1998"
+				]
+			]
+		}
 	}
 ]
