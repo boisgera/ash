@@ -66,7 +66,7 @@ chosing means eliminating ("choisir, c'est renoncer"[^1]).
 >
 > *André Gide, Les nourritures terrestres*
 
-However, the classic approach introduces asymptotic stability as a 
+However, the classic approach (see e.g. @Kha02) introduces asymptotic stability as a 
 strengthening of the concept of stability,
 with a composite definition that required stability and attractivity.
 It has several didactic drawbacks:

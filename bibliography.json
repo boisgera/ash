@@ -18,5 +18,28 @@
 				]
 			]
 		}
+	},
+
+	{
+		"id": "Kha02",
+		"type": "book",
+		"ISBN": "0-13-067389-7",
+		"language": "English",
+		"publisher": "Prentice Hall, Inc.",
+		"address": "Upper Saddle River, NJ 07458",
+		"title": "Nonlinear systems, third edition",
+		"author": [
+			{
+				"family": "Khalil",
+				"given": "Hassan K."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2002"
+				]
+			]
+		}
 	}
 ]
