@@ -46,6 +46,19 @@ details[open] summary ~ * {
 
 # Introduction
 
+🚧 **TODO:** 🚧 Use historical perspective to show that the first concept that
+emerges was *attractivity* (named as "stability" then). Try to put the 
+introduction of pathological "attractive-but-not-stable" in this historical
+picture (@Vin57: <https://zbmath.org/?q=an%3A0078.08001>.). 
+Use the historical perspective as an indicator of 
+the level of difficulty (later is harder). Also use "common references"
+such as Wikipedia: <https://en.wikipedia.org/wiki/Lyapunov_stability>
+
+🚧 **TODO:** 🚧 Emphasize that our definition makes clear the attractivity 
+concept is 90% of the way and need only a small strenghtening, of the same
+flavor. We can't say the same for the classic definition (at the very least,
+this is much less obvious!)
+
 Asymptotic stability is a cornerstone of control theory and engineering.
 There is little doubt in my opinion that if only one notion among stability,
 attractivity and asymptotic stability, should be taught to control engineers,

@@ -89,5 +89,29 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "http://zotero.org/users/local/TGMhP9yB/items/ZT62D4UV",
+		"type": "article-journal",
+		"container-title": "Doklady Akademii Nauk SSSR",
+		"ISSN": "0002-3264",
+		"journalAbbreviation": "Dokl. Akad. Nauk SSSR",
+		"language": "Russian",
+		"page": "239–240",
+		"title": "The inadequacy of the method of characteristic exponents when applied to non-linear equations",
+		"volume": "114",
+		"author": [
+			{
+				"family": "Vinograd",
+				"given": "R. E."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1957"
+				]
+			]
+		}
 	}
 ]
