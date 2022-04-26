@@ -106,4 +106,4 @@ def display_radius(i, axes):
         linestyle='dashed', color="k", linewidth=1.0,
         )[0]
 
-mivp.generate_movie(data, filename="vinograd.mp4", axes=fig.axes[0], fps=df, hook=display_radius)
+mivp.generate_movie(data, filename="vinograd-ball.mp4", axes=fig.axes[0], fps=df, hook=display_radius)

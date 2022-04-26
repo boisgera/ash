@@ -244,6 +244,30 @@ Hence, the equilibrium is attractive.
 </video> 
 ```
 
+### Example 2 -- Attractivity
+
+The equations
+\begin{equation}
+\dot{x}_1 = \frac{x_1^2(x_2 - x_1)+x_2^5}{(x_1^2+x_2^2)[1+ (x_1^2 + x_2^2)^2]}
+\label{Vinograd-1}
+\end{equation}
+
+\begin{equation}
+\dot{x}_2 = \frac{x_2^2 (x_2 - 2x_1)}{(x_1^2+x_2^2)[1+ (x_1^2 + x_2^2)^2]}
+\label{Vinograd-2}
+\end{equation}
+ 
+describe a time-invariant system introduced by @Vin57.
+The origin $(0,0)$ is the single equilibrium of the system and it is attractive.
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/vinograd-point.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
+
+
 # Limitations
 
 
@@ -300,6 +324,14 @@ $$
 \exists \, r > 0, \; 
 \lim_{t \to +\infty} x(t, \bar{B}(x_0, r)) = \{x_*\}.
 $$
+
+
+```{=html}
+<video controls style="width:100%;">
+  <source src="videos/vinograd-ball.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
 
 ### Compactness
 
@@ -388,7 +420,7 @@ the origin is asymptotically stable.
 
 ```{=html}
 <video controls style="width:100%;">
-  <source src="videos/vinograd.mp4" type="video/mp4">
+  <source src="videos/vinograd-compact.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 ```
