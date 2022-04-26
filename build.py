@@ -124,7 +124,7 @@ def post_process_html():
     html.body.header.insert_after(toc)
 
     with open("index.html", "w", encoding="utf-8") as output:
-        output.write(html.prettify())
+        output.write(str(html))
 
 
 
