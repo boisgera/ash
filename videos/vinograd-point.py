@@ -63,7 +63,7 @@ plt.axis("off")
 
 
 
-y0s = [[-0.75, 0.05]]
+y0s = [[-0.75, 0.05], [-0.75, -0.05]]
 colors = [good]*len(y0s)
 xys = []
 for y0 in tqdm(y0s):

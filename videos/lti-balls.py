@@ -30,16 +30,15 @@ def Q(f, xs, ys):
 # Vector field
 def fun(t, xy):
     x, y = xy
-    q = x**2 + y**2 * (1 + (x**2 + y**2) ** 2)
-    dx = (x**2 * (y - x) + y**5) / q
-    dy = y**2 * (y - 2 * x) / q
-    return [dx, dy]
+    dx = -2*x + y
+    dy = -2*y + x
+    return np.array([dx, dy])
 
 
 # Time span & frame rate
-t_span = (0.0, 20.0)
+t_span = (0.0, 5.0)
 
-df = 60.0
+df = 60.0 # 60.0
 dt = 1.0 / df
 t = np.arange(t_span[0], t_span[1], dt)
 t = np.r_[t, t_span[1]]
@@ -54,13 +53,38 @@ xc, yc = y0
 def vectorize(fun):
     return np.vectorize(fun, signature="()->(n)")
 
+radius = 0.5
 
 @vectorize
-def boundary(s):
+def boundary1(s):
     theta = 2*np.pi*s
     return np.array([
-        -0.75 + 0.05 * np.cos(theta),
-         0.00 + 0.05 * np.sin(theta),
+        -4 + radius * np.cos(theta),
+         1 + radius * np.sin(theta),
+    ])
+
+@vectorize
+def boundary2(s):
+    theta = 2*np.pi*s
+    return np.array([
+         4 + radius * np.cos(theta),
+        -1 + radius * np.sin(theta),
+    ])
+
+@vectorize
+def boundary3(s):
+    theta = 2*np.pi*s
+    return np.array([
+         1 + radius * np.cos(theta),
+         4 + radius * np.sin(theta),
+    ])
+
+@vectorize
+def boundary4(s):
+    theta = 2*np.pi*s
+    return np.array([
+        -1 + radius * np.cos(theta),
+        -4 + radius * np.sin(theta),
     ])
 
 
@@ -71,7 +95,7 @@ atol = 1e-12  # default: 1e-6
 # ------------------------------------------------------------------------------
 
 fig = plt.figure()
-x = y = np.linspace(-1.0, 1.0, 1000)
+x = y = np.linspace(-5.0, 5.0, 1000)
 plt.streamplot(*Q(lambda xy: fun(0, xy), x, y), color=grey_4, zorder=-100)
 plt.plot([0], [0], lw=3.0, marker="o", ms=10.0, markevery=[-1],
        markeredgecolor="white", color=grey_4)
@@ -81,7 +105,7 @@ plt.axis("off")
 data = mivp.solve_alt(
     fun=fun,
     t_eval=t,
-    boundary=boundary,
+    boundary=[boundary1, boundary2, boundary3, boundary4],
     boundary_rtol=0.0,
     boundary_atol=0.01,
     rtol=rtol,
@@ -95,12 +119,17 @@ def display_radius(i, axes):
     global circle
     if circle:
         circle.remove()
-    x, y = data[i]
-    r = max(np.sqrt(x*x + y*y))
+    
+    r = 0
+    for datum in data:
+        x, y = datum[i]
+        r = max(r, max(np.sqrt(x*x + y*y)))
+    
+    
     theta = np.linspace(0, 2*np.pi, 1000)
     circle = axes.plot(
         r*np.cos(theta), r*np.sin(theta), 
         linestyle='dashed', color="k", linewidth=1.0,
         )[0]
 
-mivp.generate_movie(data, filename="vinograd-ball.mp4", axes=fig.axes[0], fps=df, hook=display_radius)
+mivp.generate_movie(data, filename="lti-balls.mp4", axes=fig.axes[0], fps=df, hook=display_radius)

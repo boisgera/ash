@@ -120,7 +120,7 @@ details, videos, extra work to adapt, not "off-the-shelf" use, etc.).
 
 # Definitions & Notations
 
-### Vector Field {.definition} 
+## Vector Field {.definition} 
 An **(time-invariant) vector field** is a $\mathbb{R}^n$-valued function $f$ 
 whose domain $\mathrm{dom} \, f$ is an open subset $U$ of $\mathbb{R}^n$ 
 (for some natural number $n$):
@@ -131,17 +131,17 @@ $$
 
 
 
-### Dynamical System {.definition}
+## Dynamical System {.definition}
 A vector field defines a unique **(time-invariant) dynamical system** denoted 
 $\dot{x} = f(x)$. Any element of the domain of definition of $f$ is
 a **(valid) state** of the dynamical system.
 
-### Initial-Value Problem {.definition}
+## Initial-Value Problem {.definition}
 An vector field $f$ and a valid state $x_0$ define a unique
 **initial-value problem (IVP)** denoted
 $\dot{x} = f(x)$, $x(0) = x_0$.
 
-### Solution & Flow {.definition}
+## Solution & Flow {.definition}
 A **(forward) solution** of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is 
 an absolutely continuous and $\mathbb{R}^n$-valued function $x$ defined on 
 $\left[0, \tau\right[$ for some $\tau \in \left]0, +\infty\right]$
@@ -159,13 +159,13 @@ $$
 x(t, X_0) := \{x(t, x_0) \; | \; x_0 \in X_0\}.
 $$ 
 
-### Maximal Solutions {.definition}
+## Maximal Solutions {.definition}
 A solution of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is **maximal**
 if no other solution is a strict extension of it.
 
 
 
-### Well-Posed System {.definition}
+## Well-Posed System {.definition}
 A dynamical system $\dot{x} = f(x)$ is **well-posed** if for any initial state 
 the corresponding IVP has a unique maximal solution $x$ which 
 **depends continuously on the initial state**: if $x(t, x_0)$ is defined on $[0, \tau]$, 
@@ -180,14 +180,14 @@ $$
 # Attractivity
 
 
-### Equilibrium {.definition}
+## Equilibrium {.definition}
 An **equilibrium** $x_*$ of a dynamical system $\dot{x} = f(x)$ is a state such
 that $x: t \in \left[0, +\infty\right[ \to x_*$ is a solution of 
 $\dot{x} = f(x)$, $x(0) = x_*$.
 
 Equivalently, a state $x_*$ is an equilibrium if and only if $f(x_*) = 0$.
 
-### Attractivity {.definition}
+## Attractivity {.definition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally) attractive**
 if for any $x_0$ in the domain of definition of $f$, the solution $x(t, x_0)$ 
 (exists for any $t\geq 0$ and) tends to $x_*$ as $t$ tends to $+\infty$.
@@ -196,7 +196,7 @@ $$
 \lim_{t \to +\infty} x(t, x_0) = x_*.
 $$
 
-### Example 1 -- Attractivity {.example}
+## Example 1 {.example}
 The time-invariant system
 \begin{equation}
 \dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2) \label{LTI}
@@ -244,7 +244,7 @@ Hence, the equilibrium is attractive.
 </video> 
 ```
 
-### Example 2 -- Attractivity
+## Example 2
 
 The equations
 \begin{equation}
@@ -274,7 +274,7 @@ The origin $(0,0)$ is the single equilibrium of the system and it is attractive.
 
 # Asymptotic Stability
 
-### Hausdorff Distance {.definition}
+## Hausdorff Distance {.definition}
 The **Hausdorff distance** between two sets $A$ and $B$ of $\mathbb{R}^n$ is
 defined as
 $$ 
@@ -310,7 +310,7 @@ $$
 ```
 
 
-### Asymptotic Stability {.definition}
+## Asymptotic Stability {.definition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
 asymptotically stable** if for any state $x_0$ there is a (small enough) 
 closed ball of states of positive radius $r$ centered at $x_0$ 
@@ -328,12 +328,19 @@ $$
 
 ```{=html}
 <video controls style="width:100%;">
+  <source src="videos/lti-balls.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
+```
+
+```{=html}
+<video controls style="width:100%;">
   <source src="videos/vinograd-ball.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 ```
 
-### Compactness
+## Compactness
 
 A set $A$ of $\mathbb{R}^n$ is **compactly included** in a set $B$ of $\mathbb{R}^n$,
 noted $A \Subset B$, if $A$ is bounded and its closure 
@@ -341,7 +348,7 @@ $\bar{A} := \{x \in \mathbb{R}^n \; | \; d(x, A)=0\}$
 is included in $B$.
 
 
-### Proposition. Asymptotic Stability {.proposition}
+## Proposition. Asymptotic Stability {.proposition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is (globally)
 asymptotically stable if and only if the image of any set of states 
 compactly included in $\mathrm{dom} \, f$ by the flow at time $t$
@@ -392,7 +399,7 @@ $$
 </details>
 ```
 
-### Examples
+## Examples
 
 The origin is an asymptotically stable equilibrium of the system
 $$
@@ -427,20 +434,20 @@ the origin is asymptotically stable.
 
 # Stability & Legacy Definitions, Equivalence
 
-### Stability {.definition}
+## Stability {.definition}
 🚧 TODO 🚧 
 
 --------------------------------------------------------------------------------
 
-### Proposition. A. + S. $\Leftrightarrow$ A.S. {.proposition}
+## Proposition. A. + S. $\Leftrightarrow$ A.S. {.proposition}
 Attractivity + Stability $\Leftrightarrow$ Asymptotic Stability
 🚧 TODO 🚧 
 
-### {.proof}
+## {.proof}
 🚧 TODO 🚧 
 
 
-### Lemma. A.S. $\Rightarrow$ A.
+## Lemma. A.S. $\Rightarrow$ A.
 
 ```{=html}
 <details>
@@ -455,7 +462,7 @@ Obvious (by design).
 </details>
 ```
 
-### Lemma. Asymptotic Stability implies Stability.
+## Lemma. Asymptotic Stability implies Stability.
 
 ```{=html}
 <details>
@@ -507,7 +514,7 @@ Therefore that the system is stable.
 </details>
 ```
 
-### Lemma. A. + S. $\Rightarrow$ A.S.
+## Lemma. A. + S. $\Rightarrow$ A.S.
 
 
 

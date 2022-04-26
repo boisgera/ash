@@ -16,4 +16,7 @@ from plumbum.cmd import python
 python["attractivity.py"] & FG
 python["hausdorff.py"] & FG
 python["asymptotic-stability.py"] & FG
-python["vinograd.py"] & FG
+python["vinograd-point.py"] & FG
+python["lti-balls.py"] & FG
+python["vinograd-ball.py"] & FG
+python["vinograd-compact.py"] & FG
