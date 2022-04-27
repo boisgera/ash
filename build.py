@@ -74,8 +74,9 @@ def post_process_html():
     with open("index.html", encoding="utf-8") as input:
         html = HTML(input)
 
-    # Include github link into header
-    p = HTML("""
+    # Include github links into header     
+    hash_ = git("rev-parse", "--short", "HEAD").strip()
+    p = HTML(f"""
       <p>
         <span style='display:inline-block;width:1em;position:relative;margin-right:0.25em'>
           <img 
@@ -91,30 +92,12 @@ def post_process_html():
     """)
     html.body.header.append(p)
 
-    # Include github link into header
-        
-    hash_ = git("rev-parse", "--short", "HEAD").strip()
-    p = HTML(f"""
-      <p>
-        <span style='display:inline-block;width:1em;position:relative;margin-right:0.25em'>
-          <img 
-            style='position:relative;top:0.15em;'
-            height='auto' width='100%' 
-            src='icons/git.svg'>
-          </img>
-        </span>
-        <a 
-          href='https://github.com/boisgera/ash/commit/{hash_}'>
-          #{hash_}
-        </a>
-      </p>
-    """)
-    html.body.header.append(p)
-
     # Set the date to now.
     plumbum.local.env["LC_TIME"] = "en_US.utf-8" 
     date_ = date("+%A, %d %B %Y").strip()
-    html.body.header(class_="date")[0].string = date_
+    date_elt = html.body.header(class_="date")[0]
+    date_elt.string = ""
+    date_elt.insert(0, HTML(date_ + f" (#{hash_})"))
 
     # Enable Mathjax Equation Numbers (and label + eqref)
     html.head.insert(0,HTML("""
