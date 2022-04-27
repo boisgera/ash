@@ -1,8 +1,8 @@
 ---
 title: Asymptotic Stability for Humans
 author: 
-- "[Sébastien Boisgérault](mailto:Sebastien.Boisgerault@minesparis.psl.eu), MINES Paris, PSL University"
-date: "Wed, 20 Apr 2022 12:47:09 +0200"
+- "[Sébastien Boisgérault](mailto:Sebastien.Boisgerault@minesparis.psl.eu), Mines Paris -- PSL"
+date: today
 ---
 
 ```{=html}
@@ -30,8 +30,6 @@ summary::-webkit-details-marker {
 }
 
 
-
-
 details[open] summary ~ * {
   animation: sweep .5s ease-in-out;
 }
@@ -42,6 +40,30 @@ details[open] summary ~ * {
 </style>
 ```
 
+```{=html}
+<style>
+.proposition::after {
+  content: ' 💎'
+}
+
+.definition::after {
+  content: ' 🏷️'
+}
+
+.TODO::after {
+  content: ' 🚧'
+}
+
+.example::after {
+  content: ' 🔍'
+}
+
+.proof::after {
+  content: ' ⚙️'
+}
+
+</style>
+```
 
 
 # Introduction
@@ -117,10 +139,11 @@ not in my opinion popular enough given its didactic potential.
 🚧 **TODO:** 🚧 explain document meant for lecturers, not students.
 Relate this to its organisation (relatively standalone, level of
 details, videos, extra work to adapt, not "off-the-shelf" use, etc.).
+And thus explain the plan of the document (with links).
 
 # Definitions & Notations
 
-## Vector Field {.definition} 
+### Vector Field {.definition} 
 An **(time-invariant) vector field** is a $\mathbb{R}^n$-valued function $f$ 
 whose domain $\mathrm{dom} \, f$ is an open subset $U$ of $\mathbb{R}^n$ 
 (for some natural number $n$):
@@ -131,17 +154,17 @@ $$
 
 
 
-## Dynamical System {.definition}
+### Dynamical System {.definition}
 A vector field defines a unique **(time-invariant) dynamical system** denoted 
 $\dot{x} = f(x)$. Any element of the domain of definition of $f$ is
 a **(valid) state** of the dynamical system.
 
-## Initial-Value Problem {.definition}
+### Initial-Value Problem {.definition}
 An vector field $f$ and a valid state $x_0$ define a unique
 **initial-value problem (IVP)** denoted
 $\dot{x} = f(x)$, $x(0) = x_0$.
 
-## Solution & Flow {.definition}
+### Solution & Flow {.definition}
 A **(forward) solution** of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is 
 an absolutely continuous and $\mathbb{R}^n$-valued function $x$ defined on 
 $\left[0, \tau\right[$ for some $\tau \in \left]0, +\infty\right]$
@@ -159,13 +182,17 @@ $$
 x(t, X_0) := \{x(t, x_0) \; | \; x_0 \in X_0\}.
 $$ 
 
-## Maximal Solutions {.definition}
+### Maximal Solutions {.definition}
 A solution of the IVP $\dot{x} = f(x)$, $x(0) = x_0$ is **maximal**
 if no other solution is a strict extension of it.
 
 
+### TODO {.TODO}
 
-## Well-Posed System {.definition}
+Need to say explicitly why we are talking about this somewhere. We are actually
+using well-posedness in our equivalence proofs.
+
+### Well-Posed System {.definition}
 A dynamical system $\dot{x} = f(x)$ is **well-posed** if for any initial state 
 the corresponding IVP has a unique maximal solution $x$ which 
 **depends continuously on the initial state**: if $x(t, x_0)$ is defined on $[0, \tau]$, 
@@ -174,6 +201,13 @@ $x(t, x'_0)$ is also defined on $[0, \tau]$ and
 $$
 \lim_{x_0' \to x_0} \left[\max_{t \in [0, \tau]} \|x(t, x'_0) - x(t, x_0)\|\right] = 0.
 $$
+
+### Well-Posed System {.proposition}
+If the vector field $f$ is continuously differentiable,
+$$
+\frac {\partial f_i}{\partial x_j} \mbox{ exists and is continuous}, \qquad i, j=1,\dots, n
+$$
+then the dynamical system $\dot{x} = f(x)$ is well-posed.
 
 
 
@@ -196,7 +230,7 @@ $$
 \lim_{t \to +\infty} x(t, x_0) = x_*.
 $$
 
-## Example 1 {.example}
+## Linear-Time Invariant System {.example}
 The time-invariant system
 \begin{equation}
 \dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2) \label{LTI}
@@ -244,7 +278,7 @@ Hence, the equilibrium is attractive.
 </video> 
 ```
 
-## Example 2
+## Vinograd System {.example}
 
 The equations
 \begin{equation}
@@ -268,54 +302,105 @@ The origin $(0,0)$ is the single equilibrium of the system and it is attractive.
 ```
 
 
-# Limitations
+## Limitations/weakness of attractivity
+
+🚧 TODO 🚧 
 
 
 
 # Asymptotic Stability
 
 ## Hausdorff Distance {.definition}
-The **Hausdorff distance** between two sets $A$ and $B$ of $\mathbb{R}^n$ is
-defined as
-$$ 
-d_H(A, B) := \max \left\{ \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b) \right\}.
+
+Let $a, b$ be two points of $\mathbb{R}^n$ and $A, B$ be two sets of $\mathbb{R}^n$.
+The distance between $a$ and $b$ is defined by
 $$
-(see e.g. @Kur66, p. 214). 
-A time-dependent set $A(t)$ tends to a set $B$ when $t$ tends to $+\infty$, 
+d(a, b) := \|b - a\|,
+$$
+the distance between $A$ and $b$ and $a$ and $B$ respectively by
+$$
+d(A, b) := \sup_{a \in A} d(a, b)\, \qquad d(a, B) := \sup_{b \in B} d(a, b)
+$$
+and the distance between $A$ and $B$ by
+$$
+d(A, B) := \inf_{a \in A} d(a, B)= \inf_{a \in A} \inf_{b \in B} d(a, b).
+$$
+
+However, this  distance between two sets does not measure in an adequate
+way how far the two sets differ from each other.
+For example if $A$ and $B$ share points
+then $d(A, B)=0$
+even if $A$ is very small and $B$ very large.
+
+For this task, the **(Pompeiu-)Hausdorff distance** is more appropriate
+$$ 
+d_H(A, B) := \max \left\{ \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b) \right\}
+$$
+(see e.g. @Kur66, p. 214). It measures how far the set $A$
+deviates from the set $B$ and how far the set $B$ deviates from the set $A$
+and returns the largest of these numbers. If we consider only non-empty 
+bounded and closed (compact) subsets of $\mathbb{R}^n$, this Hausdorff "distance"
+is actually a proper distance.
+
+We can define limits of sets using the Hausdorff distance: we say that
+a time-dependent set **$A(t)$ tends to a set $B$** when $t$ tends to $+\infty$, 
 noted
 $$
 \lim_{t \to +\infty} A(t) = B,
 $$
 whenever $\lim_{t \to +\infty} d_H(A(t), B) = 0.$
 
+To study asymptotic stability, we only need to consider the Hausdorff distance
+$d_H(A, B)$ when $B$ has a single element $b$. In this case, the Hausdorff 
+distance has a simple geometric interpretation.
 
-
-
-When $B$ is a singleton $\{b_*\}$, we have 
+## How far is a set from a single point? {.proposition}
+The Hausdorff distance between $A$ and $\{b\}$ is the radius of the smallest
+circle centered at $b$ which encloses $A$
 $$
-\sup_{a \in A} d(a, B) = \sup_{a \in A} d(a, b_*) \geq \inf_{a \in A} d(a, b_*) 
-= d(A, b_*)
-= \sup_{b \in B} d(A, b), 
+d_H(A, {b}) 
+= \sup_{a \in A} \|a - b\| 
+= \min \, \{r \geq 0 \; | \; \mbox{for any }\, a \in A, \, \|a - b\| \leq r\}
 $$
-thus
-$$
-d_H(A, \{b_*\}) = \sup_{a \in A} d(a, b_*).
-$$
+(or $+\infty$ if $A$ is unbounded i.e. no circle of finite radius encloses it).
 
 ```{=html}
-<video controls style="width:100%;">
+<video controls style="width:100%;margin-bottom:1em;">
   <source src="videos/hausdorff.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 ```
 
 
+<details>
+<summary>
+### Proof {.proof}
+</summary>
+
+If $B =\{b\}$ , we have 
+$$
+\sup_{a \in A} d(a, B) = \sup_{a \in A} d(a, b) \geq \inf_{a \in A} d(a, b) 
+= d(A, b)
+= \sup_{b' \in B} d(A, b'), 
+$$
+thus
+$$
+\max \left\{ \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b) \right\}  =
+\sup_{a \in A} d(a, b)
+$$
+and consequently
+$$
+d_H(A, \{b\}) = \sup_{a \in A} d(a, b) = \sup_{a \in A} \|a - b\|.
+$$
+
+</details>
+
 ## Asymptotic Stability {.definition}
 An equilibrium $x_*$ of a well-posed system $\dot{x} = f(x)$ is **(globally)
 asymptotically stable** if for any state $x_0$ there is a (small enough) 
 closed ball of states of positive radius $r$ centered at $x_0$ 
 $$
-\bar{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; d(x, x_0) \leq r\}
+\bar{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; \|x - x_0\| \leq r\}
 $$ 
 whose image by the flow at time $t$ (exists for every $t\geq 0$ and) 
 tends to $\{x_*\}$ as $t$ tends to $+\infty$.
@@ -358,12 +443,11 @@ $$
 \lim_{t \to +\infty} x(t, X_0) = \{x_*\}.
 $$
 
-```{=html}
 <details>
-  <summary>
-    <h3>Proof</h3>
-  </summary>
-```
+<summary>
+### Proof {.proof}
+</summary>
+
 
 Since a closed ball of states is compactly included in $\mathrm{dom} \, f$,
 the above criteria clearly implies asymptotic stability.
@@ -395,9 +479,8 @@ $$
 \lim_{t \to +\infty} d_H(X_0, \{x_*\}) \to 0.
 $$
 
-```{=html}
 </details>
-```
+
 
 ## Examples
 
@@ -449,27 +532,21 @@ Attractivity + Stability $\Leftrightarrow$ Asymptotic Stability
 
 ## Lemma. A.S. $\Rightarrow$ A.
 
-```{=html}
 <details>
-  <summary>
-    <h3>Proof</h3>
-  </summary>
-```
+<summary>
+### Proof {.proof}
+</summary>
 
 Obvious (by design).
 
-```{=html}
 </details>
-```
 
 ## Lemma. Asymptotic Stability implies Stability.
 
-```{=html}
 <details>
-  <summary>
-    <h3>Proof</h3>
-  </summary>
-```
+<summary>
+### Proof {.proof}
+</summary>
 
 Let's assume that the system is asymptotically stable.
 Let $r_1 > 0$ such that the closed ball $B_1$ of radius $r_1$ centered at $x_e$ 
@@ -510,20 +587,15 @@ t\geq 0 \, \Rightarrow x(t, B_2) \subset B_1.
 $$ 
 Therefore that the system is stable.
 
-```{=html}
 </details>
-```
 
 ## Lemma. A. + S. $\Rightarrow$ A.S.
 
-
-
-```{=html}
 <details>
-  <summary>
-    <h3>Proof</h3>
-  </summary>
-```
+<summary>
+### Proof {.proof}
+</summary>
+
 ℹ️ We prove directly the stronger version of A.S.
 
 Let $X_0$ be a bounded set whose closure is included in $\mathrm{dom} \, f$.
@@ -578,8 +650,7 @@ $$
 then $\|x(t, x_0) - x_e\| \leq r_1$. Thus, the equilbrium is asymptotically
 stable.
 
-```{=html}
 </details>
-```
+
 
 # References

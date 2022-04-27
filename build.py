@@ -19,11 +19,27 @@ except ImportError:
     git = None
 import typer
 
+MATHJAX_CONF="""
+<script>
+window.MathJax = {
+  tex: {
+    tags: 'ams'
+  },
+  chtml: {
+    mtextInheritFont: true,
+  }
+};
+</script>
+"""
+
 options = [
     "--standalone",
     "--toc",
     "--toc-depth=2",
+    # Maths
     "--mathjax",
+    f"--variable=header-includes:{MATHJAX_CONF}",
+    #
     "--css=css/style.css",
     "--include-in-header=html/font.html",
     "--variable=lang:en",
