@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script>
+        window.MathJax = {
+          tex: {
+            tags: 'ams'
+          }
+        };
+       </script>
+
+<meta charset="utf-8"/>
+<meta content="pandoc" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<meta content="Sébastien Boisgérault, Mines Paris – PSL" name="author"/>
+<title>Asymptotic Stability for Humans</title>
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link href="css/style.css" rel="stylesheet"/>
+<script>
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    },
+    chtml: {
+      mtextInheritFont: true,
+    }
+  };
+  </script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Asymptotic Stability for Humans</h1>
+<p class="author"><a href="mailto:Sebastien.Boisgerault@minesparis.psl.eu">Sébastien
+Boisgérault</a>, Mines Paris – PSL</p>
+<p class="date">Wednesday, 27 April 2022 (#f4a288b)</p>
+
+<p>
+<span style="display:inline-block;width:1em;position:relative;margin-right:0.25em">
+<img height="auto" src="icons/github.svg" style="position:relative;top:0.15em;" width="100%"/>
+</span>
+<a href="https://github.com/boisgera/ash">
+          https://github.com/boisgera/ash
+        </a>
+</p>
+</header>
+<details>
+<summary>
+<h2>Contents</h2>
+</summary>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#definitions-notations">Definitions &amp;
+Notations</a></li>
+<li><a href="#attractivity">Attractivity</a>
+<ul>
+<li><a href="#equilibrium">Equilibrium</a></li>
+<li><a href="#attractivity-1">Attractivity</a></li>
+<li><a href="#linear-time-invariant-system">Linear-Time Invariant
+System</a></li>
+<li><a href="#vinograd-system">Vinograd System</a></li>
+<li><a href="#limitationsweakness-of-attractivity">Limitations/weakness
+of attractivity</a></li>
+</ul></li>
+<li><a href="#asymptotic-stability">Asymptotic Stability</a>
+<ul>
+<li><a href="#hausdorff-distance">Hausdorff Distance</a></li>
+<li><a href="#how-far-is-a-set-from-a-single-point">How far is a set
+from a single point?</a></li>
+<li><a href="#asymptotic-stability-1">Asymptotic Stability</a></li>
+<li><a href="#compactness">Compactness</a></li>
+<li><a href="#proposition.-asymptotic-stability">Proposition. Asymptotic
+Stability</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+<li><a href="#stability-legacy-definitions-equivalence">Stability &amp;
+Legacy Definitions, Equivalence</a>
+<ul>
+<li><a href="#stability">Stability</a></li>
+<li><a href="#proposition.-a.-s.-leftrightarrow-a.s.">Proposition. A. +
+S. <span class="math inline">\(\Leftrightarrow\)</span> A.S.</a></li>
+<li><a href="#section"></a></li>
+<li><a href="#lemma.-a.s.-rightarrow-a.">Lemma. A.S. <span class="math inline">\(\Rightarrow\)</span> A.</a></li>
+<li><a href="#lemma.-asymptotic-stability-implies-stability.">Lemma.
+Asymptotic Stability implies Stability.</a></li>
+<li><a href="#lemma.-a.-s.-rightarrow-a.s.">Lemma. A. + S. <span class="math inline">\(\Rightarrow\)</span> A.S.</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</nav></details>
+
+
+<style>
+details h1, details h2, details h3{
+  display: inline;
+}
+</style>
+<style>
+details summary {
+  cursor: pointer;
+  list-style: '🔒 ';
+}
+
+details[open] summary {
+  cursor: pointer;
+  list-style: '🔓 ';
+}
+
+summary::-webkit-details-marker {
+  display: none
+}
+
+
+details[open] summary ~ * {
+  animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+  0%    {opacity: 0}
+  100%  {opacity: 1}
+}
+</style>
+<style>
+.proposition::after {
+  content: ' 💎'
+}
+
+.definition::after {
+  content: ' 🏷️'
+}
+
+.TODO::after {
+  content: ' 🚧'
+}
+
+.example::after {
+  content: ' 🔍'
+}
+
+.proof::after {
+  content: ' ⚙️'
+}
+
+</style>
+<h1 id="introduction">Introduction</h1>
+<p>🚧 <strong>TODO:</strong> 🚧 Use historical perspective to show that
+the first concept that emerges was <em>attractivity</em> (named as
+“stability” then). Try to put the introduction of pathological
+“attractive-but-not-stable” in this historical picture (<span class="citation" data-cites="Vin57">Vinograd (<a href="#ref-Vin57" role="doc-biblioref">1957</a>)</span>: <a class="uri" href="https://zbmath.org/?q=an%3A0078.08001">https://zbmath.org/?q=an%3A0078.08001</a>.). Use the
+historical perspective as an indicator of the level of difficulty (later
+is harder). Also use “common references” such as Wikipedia: <a class="uri" href="https://en.wikipedia.org/wiki/Lyapunov_stability">https://en.wikipedia.org/wiki/Lyapunov_stability</a></p>
+<p>🚧 <strong>TODO:</strong> 🚧 Emphasize that our definition makes
+clear the attractivity concept is 90% of the way and need only a small
+strenghtening, of the same flavor. We can’t say the same for the classic
+definition (at the very least, this is much less obvious!)</p>
+<p>Asymptotic stability is a cornerstone of control theory and
+engineering. There is little doubt in my opinion that if only one notion
+among stability, attractivity and asymptotic stability, should be taught
+to control engineers, it should be asymptotic stability. Therefore,
+asymptotic stability, not attractivity nor stability, should be the only
+focus of time and complexity-bound control engineering lectures. As
+heartbreaking as this conclusion can be, most experienced lecturers know
+that chosing means eliminating (“choisir, c’est renoncer”<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>).</p>
+<p>However, the classic approach (see e.g. <span class="citation" data-cites="Kha02">Khalil (<a href="#ref-Kha02" role="doc-biblioref">2002</a>)</span> p. 112, <span class="citation" data-cites="Son98">Sontag (<a href="#ref-Son98" role="doc-biblioref">1998</a>)</span> p. 211) introduces asymptotic
+stability as a strengthening of the concept of stability, with a
+composite definition that required stability and attractivity. It has
+several didactic drawbacks:</p>
+<ul>
+<li><p>It requires to understand the concept of stability, which is
+arguably hard (at the very least much harder than attractivity). Using
+it as a foundation to define asymptotic stability makes automatically
+asymptotic stability at least equally as hard.</p></li>
+<li><p>Using a composite definition for asymptotic stability makes it a
+derived concept, which appears as a second-class citizen of control
+theory instead of the first-class citizen that it should be.</p></li>
+<li><p>This definition fails to address in simple terms what are in my
+opinion the shortcoming of the concept of attractivity and why it needs
+to be strengthened: a catastrophic failure to ensure a common speed of
+convergence, even for arbitrary close initial states.</p></li>
+</ul>
+<p>In this document we follow a different path: we introduce
+attractivity, expose it shortcomings, then introduce a definition of
+asymptotic stability as an independent concept which is</p>
+<ul>
+<li><p>an obvious strenghtening of attractivity (and clearly solves its
+issues),</p></li>
+<li><p>of reasonable complexity (harder than attractivity, but simpler
+than stability),</p></li>
+<li><p>equivalent to the classic definition.</p></li>
+</ul>
+<p>To the best of my knowledge, my definition is original, but I have
+not performed an extensive research on this subject. Suffice to say that
+I have never been exposed to it in my earlier studes; if the concept is
+not new (I seriously doubt it is) at the very least it is not in my
+opinion popular enough given its didactic potential.</p>
+<p>🚧 <strong>TODO:</strong> 🚧 explain document meant for lecturers,
+not students. Relate this to its organisation (relatively standalone,
+level of details, videos, extra work to adapt, not “off-the-shelf” use,
+etc.). And thus explain the plan of the document (with links).</p>
+<h1 id="definitions-notations">Definitions &amp; Notations</h1>
+<h3 class="definition" id="vector-field">Vector Field</h3>
+<p>An <strong>(time-invariant) vector field</strong> is a <span class="math inline">\(\mathbb{R}^n\)</span>-valued function <span class="math inline">\(f\)</span> whose domain <span class="math inline">\(\mathrm{dom} \, f\)</span> is an open subset <span class="math inline">\(U\)</span> of <span class="math inline">\(\mathbb{R}^n\)</span> (for some natural number
+<span class="math inline">\(n\)</span>): <span class="math display">\[
+f: U \subset \mathbb{R}^n \to \mathbb{R}^n,
+\qquad \partial U \cap U= \varnothing.
+\]</span></p>
+<h3 class="definition" id="dynamical-system">Dynamical System</h3>
+<p>A vector field defines a unique <strong>(time-invariant) dynamical
+system</strong> denoted <span class="math inline">\(\dot{x} =
+f(x)\)</span>. Any element of the domain of definition of <span class="math inline">\(f\)</span> is a <strong>(valid) state</strong> of
+the dynamical system.</p>
+<h3 class="definition" id="initial-value-problem">Initial-Value
+Problem</h3>
+<p>An vector field <span class="math inline">\(f\)</span> and a valid
+state <span class="math inline">\(x_0\)</span> define a unique
+<strong>initial-value problem (IVP)</strong> denoted <span class="math inline">\(\dot{x} = f(x)\)</span>, <span class="math inline">\(x(0) = x_0\)</span>.</p>
+<h3 class="definition" id="solution-flow">Solution &amp; Flow</h3>
+<p>A <strong>(forward) solution</strong> of the IVP <span class="math inline">\(\dot{x} = f(x)\)</span>, <span class="math inline">\(x(0) = x_0\)</span> is an absolutely continuous
+and <span class="math inline">\(\mathbb{R}^n\)</span>-valued function
+<span class="math inline">\(x\)</span> defined on <span class="math inline">\(\left[0, \tau\right[\)</span> for some <span class="math inline">\(\tau \in \left]0, +\infty\right]\)</span> such
+that <span class="math display">\[
+x(t) = x_0 + \int_0^t f(x(s)) \, ds, \qquad 0 \leq t &lt; \tau.
+\]</span> When we wish to emphasize the role of the initial state <span class="math inline">\(x_0\)</span>, we denote the solution <span class="math inline">\(x(t, x_0)\)</span> and then call the application
+<span class="math inline">\(x\)</span> the <strong>flow</strong> of the
+dynamical system. We also consider solutions associated with a set <span class="math inline">\(X_0 \subset \mathrm{dom} \, f\)</span> of initial
+states: we denote <span class="math inline">\(x(t, X_0)\)</span> the
+image of <span class="math inline">\(X_0\)</span> by the flow at time
+<span class="math inline">\(t\)</span>: <span class="math display">\[
+x(t, X_0) := \{x(t, x_0) \; | \; x_0 \in X_0\}.
+\]</span></p>
+<h3 class="definition" id="maximal-solutions">Maximal Solutions</h3>
+<p>A solution of the IVP <span class="math inline">\(\dot{x} =
+f(x)\)</span>, <span class="math inline">\(x(0) = x_0\)</span> is
+<strong>maximal</strong> if no other solution is a strict extension of
+it.</p>
+<h3 class="TODO" id="todo">TODO</h3>
+<p>Need to say explicitly why we are talking about this somewhere. We
+are actually using well-posedness in our equivalence proofs.</p>
+<h3 class="definition" id="well-posed-system">Well-Posed System</h3>
+<p>A dynamical system <span class="math inline">\(\dot{x} =
+f(x)\)</span> is <strong>well-posed</strong> if for any initial state
+the corresponding IVP has a unique maximal solution <span class="math inline">\(x\)</span> which <strong>depends continuously on
+the initial state</strong>: if <span class="math inline">\(x(t,
+x_0)\)</span> is defined on <span class="math inline">\([0,
+\tau]\)</span>, then for <span class="math inline">\(x_0'\)</span>
+close enough to <span class="math inline">\(x_0\)</span>, <span class="math inline">\(x(t, x'_0)\)</span> is also defined on <span class="math inline">\([0, \tau]\)</span> and <span class="math display">\[
+\lim_{x_0' \to x_0} \left[\max_{t \in [0, \tau]} \|x(t, x'_0) -
+x(t, x_0)\|\right] = 0.
+\]</span></p>
+<h3 class="proposition" id="well-posed-system-1">Well-Posed System</h3>
+<p>If the vector field <span class="math inline">\(f\)</span> is
+continuously differentiable, <span class="math display">\[
+\frac {\partial f_i}{\partial x_j} \mbox{ exists and is continuous},
+\qquad i, j=1,\dots, n
+\]</span> then the dynamical system <span class="math inline">\(\dot{x}
+= f(x)\)</span> is well-posed.</p>
+<h1 id="attractivity">Attractivity</h1>
+<h2 class="definition" id="equilibrium">Equilibrium</h2>
+<p>An <strong>equilibrium</strong> <span class="math inline">\(x_*\)</span> of a dynamical system <span class="math inline">\(\dot{x} = f(x)\)</span> is a state such that <span class="math inline">\(x: t \in \left[0, +\infty\right[ \to x_*\)</span>
+is a solution of <span class="math inline">\(\dot{x} = f(x)\)</span>,
+<span class="math inline">\(x(0) = x_*\)</span>.</p>
+<p>Equivalently, a state <span class="math inline">\(x_*\)</span> is an
+equilibrium if and only if <span class="math inline">\(f(x_*) =
+0\)</span>.</p>
+<h2 class="definition" id="attractivity-1">Attractivity</h2>
+<p>An equilibrium <span class="math inline">\(x_*\)</span> of a
+well-posed system <span class="math inline">\(\dot{x} = f(x)\)</span> is
+<strong>(globally) attractive</strong> if for any <span class="math inline">\(x_0\)</span> in the domain of definition of <span class="math inline">\(f\)</span>, the solution <span class="math inline">\(x(t, x_0)\)</span> (exists for any <span class="math inline">\(t\geq 0\)</span> and) tends to <span class="math inline">\(x_*\)</span> as <span class="math inline">\(t\)</span> tends to <span class="math inline">\(+\infty\)</span>. <span class="math display">\[
+\forall \, x_0 \in \mathrm{dom} \, f, \;
+\lim_{t \to +\infty} x(t, x_0) = x_*.
+\]</span></p>
+<h2 class="example" id="linear-time-invariant-system">Linear-Time
+Invariant System</h2>
+<p>The time-invariant system <span class="math display">\[\begin{equation}
+\dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2)
+\label{LTI}
+\end{equation}\]</span> has a single equilibrium <span class="math inline">\(x_* = (0, 0)\)</span>. The auxiliary variables
+<span class="math inline">\(y^1:= x^1+x^2\)</span> and <span class="math inline">\(y^2:=x^1 - x^2\)</span> satisfy the decoupled
+differential equations <span class="math inline">\(\dot{y}^1 =
+-y^1\)</span> and <span class="math inline">\(\dot{y}^2 = -3
+y^2\)</span>, the solution associated to an initial state <span class="math inline">\(x_0 = (x_0^1, x_0^2)\)</span> is <span class="math display">\[
+y^1(t) = (x_0^1 + x_0^2)e^{-t}, \;
+y^2(t) = (x_0^1 - x_0^2)e^{-3t}
+\]</span> and thus <span class="math display">\[\begin{equation}
+\left[
+  \begin{array}{c}
+  x^1 \\
+  x^2
+  \end{array}
+\right](t)
+= 1/2 \left[
+  \begin{array}{c}
+  x_0^1 + x_0^2 \\
+  x_0^1 + x_0^2
+  \end{array}
+\right]e^{-t}
++  1/2 \left[
+  \begin{array}{c}
+  x_0^1 - x_0^2 \\
+  x_0^2 - x_0^1
+  \end{array}
+\right]e^{-3t}.
+\label{LTI-solutions}
+\end{equation}\]</span> It is therefore clear that for every initial
+state <span class="math inline">\(x_0\)</span>, we have <span class="math display">\[
+\lim_{t \to +\infty} x(t, x_0) = x_*.
+\]</span> Hence, the equilibrium is attractive.</p>
+<video controls="" style="width:100%;">
+<source src="videos/attractivity.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<h2 class="example" id="vinograd-system">Vinograd System</h2>
+<p>The equations <span class="math display">\[\begin{equation}
+\dot{x}_1 = \frac{x_1^2(x_2 - x_1)+x_2^5}{(x_1^2+x_2^2)[1+ (x_1^2 +
+x_2^2)^2]}
+\label{Vinograd-1}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\dot{x}_2 = \frac{x_2^2 (x_2 - 2x_1)}{(x_1^2+x_2^2)[1+ (x_1^2 +
+x_2^2)^2]}
+\label{Vinograd-2}
+\end{equation}\]</span></p>
+<p>describe a time-invariant system introduced by <span class="citation" data-cites="Vin57">Vinograd (<a href="#ref-Vin57" role="doc-biblioref">1957</a>)</span>. The origin <span class="math inline">\((0,0)\)</span> is the single equilibrium of the
+system and it is attractive.</p>
+<video controls="" style="width:100%;">
+<source src="videos/vinograd-point.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<h2 id="limitationsweakness-of-attractivity">Limitations/weakness of
+attractivity</h2>
+<p>🚧 TODO 🚧</p>
+<h1 id="asymptotic-stability">Asymptotic Stability</h1>
+<h2 class="definition" id="hausdorff-distance">Hausdorff Distance</h2>
+<p>Let <span class="math inline">\(a, b\)</span> be two points of <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(A, B\)</span> be two sets of <span class="math inline">\(\mathbb{R}^n\)</span>. The distance between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> is defined by <span class="math display">\[
+d(a, b) := \|b - a\|,
+\]</span> the distance between <span class="math inline">\(A\)</span>
+and <span class="math inline">\(b\)</span> and <span class="math inline">\(a\)</span> and <span class="math inline">\(B\)</span> respectively by <span class="math display">\[
+d(A, b) := \sup_{a \in A} d(a, b)\, \qquad d(a, B) := \sup_{b \in B}
+d(a, b)
+\]</span> and the distance between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> by <span class="math display">\[
+d(A, B) := \inf_{a \in A} d(a, B)= \inf_{a \in A} \inf_{b \in B} d(a,
+b).
+\]</span></p>
+<p>However, this distance between two sets does not measure in an
+adequate way how far the two sets differ from each other. For example if
+<span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> share points then <span class="math inline">\(d(A, B)=0\)</span> even if <span class="math inline">\(A\)</span> is very small and <span class="math inline">\(B\)</span> very large.</p>
+<p>For this task, the <strong>(Pompeiu-)Hausdorff distance</strong> is
+more appropriate <span class="math display">\[
+d_H(A, B) := \max \left\{ \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b)
+\right\}
+\]</span> (see e.g. <span class="citation" data-cites="Kur66">Kuratowski
+(<a href="#ref-Kur66" role="doc-biblioref">1966</a>)</span>, p. 214). It
+measures how far the set <span class="math inline">\(A\)</span> deviates
+from the set <span class="math inline">\(B\)</span> and how far the set
+<span class="math inline">\(B\)</span> deviates from the set <span class="math inline">\(A\)</span> and returns the largest of these
+numbers. If we consider only non-empty bounded and closed (compact)
+subsets of <span class="math inline">\(\mathbb{R}^n\)</span>, this
+Hausdorff “distance” is actually a proper distance.</p>
+<p>We can define limits of sets using the Hausdorff distance: we say
+that a time-dependent set <strong><span class="math inline">\(A(t)\)</span> tends to a set <span class="math inline">\(B\)</span></strong> when <span class="math inline">\(t\)</span> tends to <span class="math inline">\(+\infty\)</span>, noted <span class="math display">\[
+\lim_{t \to +\infty} A(t) = B,
+\]</span> whenever <span class="math inline">\(\lim_{t \to +\infty}
+d_H(A(t), B) = 0.\)</span></p>
+<p>To study asymptotic stability, we only need to consider the Hausdorff
+distance <span class="math inline">\(d_H(A, B)\)</span> when <span class="math inline">\(B\)</span> has a single element <span class="math inline">\(b\)</span>. In this case, the Hausdorff distance
+has a simple geometric interpretation.</p>
+<h2 class="proposition" id="how-far-is-a-set-from-a-single-point">How
+far is a set from a single point?</h2>
+<p>The Hausdorff distance between <span class="math inline">\(A\)</span>
+and <span class="math inline">\(\{b\}\)</span> is the radius of the
+smallest circle centered at <span class="math inline">\(b\)</span> which
+encloses <span class="math inline">\(A\)</span> <span class="math display">\[
+d_H(A, {b})
+= \sup_{a \in A} \|a - b\|
+= \min \, \{r \geq 0 \; | \; \mbox{for any }\, a \in A, \, \|a - b\|
+\leq r\}
+\]</span> (or <span class="math inline">\(+\infty\)</span> if <span class="math inline">\(A\)</span> is unbounded i.e. no circle of finite
+radius encloses it).</p>
+<video controls="" style="width:100%;margin-bottom:1em;">
+<source src="videos/hausdorff.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<details>
+<summary>
+<h3 class="proof" id="proof">Proof</h3>
+</summary>
+<p>If <span class="math inline">\(B =\{b\}\)</span> , we have <span class="math display">\[
+\sup_{a \in A} d(a, B) = \sup_{a \in A} d(a, b) \geq \inf_{a \in A} d(a,
+b)
+= d(A, b)
+= \sup_{b' \in B} d(A, b'),
+\]</span> thus <span class="math display">\[
+\max \left\{ \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b) \right\}  =
+\sup_{a \in A} d(a, b)
+\]</span> and consequently <span class="math display">\[
+d_H(A, \{b\}) = \sup_{a \in A} d(a, b) = \sup_{a \in A} \|a - b\|.
+\]</span></p>
+</details>
+<h2 class="definition" id="asymptotic-stability-1">Asymptotic
+Stability</h2>
+<p>An equilibrium <span class="math inline">\(x_*\)</span> of a
+well-posed system <span class="math inline">\(\dot{x} = f(x)\)</span> is
+<strong>(globally) asymptotically stable</strong> if for any state <span class="math inline">\(x_0\)</span> there is a (small enough) closed ball
+of states of positive radius <span class="math inline">\(r\)</span>
+centered at <span class="math inline">\(x_0\)</span> <span class="math display">\[
+\bar{B}(x_0, r) := \{x \in \mathbb{R}^n \; | \; \|x - x_0\| \leq r\}
+\]</span> whose image by the flow at time <span class="math inline">\(t\)</span> (exists for every <span class="math inline">\(t\geq 0\)</span> and) tends to <span class="math inline">\(\{x_*\}\)</span> as <span class="math inline">\(t\)</span> tends to <span class="math inline">\(+\infty\)</span>. <span class="math display">\[
+\forall \, x_0 \in \mathrm{dom} \, f, \;
+\exists \, r &gt; 0, \;
+\lim_{t \to +\infty} x(t, \bar{B}(x_0, r)) = \{x_*\}.
+\]</span></p>
+<video controls="" style="width:100%;">
+<source src="videos/lti-balls.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<video controls="" style="width:100%;">
+<source src="videos/vinograd-ball.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<h2 id="compactness">Compactness</h2>
+<p>A set <span class="math inline">\(A\)</span> of <span class="math inline">\(\mathbb{R}^n\)</span> is <strong>compactly
+included</strong> in a set <span class="math inline">\(B\)</span> of
+<span class="math inline">\(\mathbb{R}^n\)</span>, noted <span class="math inline">\(A \Subset B\)</span>, if <span class="math inline">\(A\)</span> is bounded and its closure <span class="math inline">\(\bar{A} := \{x \in \mathbb{R}^n \; | \; d(x,
+A)=0\}\)</span> is included in <span class="math inline">\(B\)</span>.</p>
+<h2 class="proposition" id="proposition.-asymptotic-stability">Proposition. Asymptotic
+Stability</h2>
+<p>An equilibrium <span class="math inline">\(x_*\)</span> of a
+well-posed system <span class="math inline">\(\dot{x} = f(x)\)</span> is
+(globally) asymptotically stable if and only if the image of any set of
+states compactly included in <span class="math inline">\(\mathrm{dom} \,
+f\)</span> by the flow at time <span class="math inline">\(t\)</span>
+(exists for every <span class="math inline">\(t\geq 0\)</span> and)
+tends to <span class="math inline">\(\{x_*\}\)</span> as <span class="math inline">\(t\)</span> tends to <span class="math inline">\(+\infty\)</span>. <span class="math display">\[
+\forall \, X_0 \Subset \mathrm{dom} \, f, \;
+\lim_{t \to +\infty} x(t, X_0) = \{x_*\}.
+\]</span></p>
+<details>
+<summary>
+<h3 class="proof" id="proof-1">Proof</h3>
+</summary>
+<p>Since a closed ball of states is compactly included in <span class="math inline">\(\mathrm{dom} \, f\)</span>, the above criteria
+clearly implies asymptotic stability.</p>
+<p>Conversly, let <span class="math inline">\(X_0\)</span> be a set
+compactly included in <span class="math inline">\(\mathrm{dom} \,
+f\)</span>. For every <span class="math inline">\(x_0 \in
+\bar{X}_0,\)</span> there is a positive radius <span class="math inline">\(r(x_0)\)</span> such that <span class="math display">\[
+\lim_{t \to +\infty} x(t, \bar{B}(x_0, r(x_0))) = \{x_*\}.
+\]</span> The collection of all open balls <span class="math inline">\(B(x_0, r(x_0))\)</span>, when <span class="math inline">\(x_0 \in \bar{X}_0\)</span> is an open cover of the
+compact set <span class="math inline">\(\bar{X}_0\)</span>, thus there
+is a finite sub-collection <span class="math inline">\(B_1\)</span>,
+<span class="math inline">\(B_2\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(B_p\)</span> such that <span class="math display">\[
+\bar{X}_0 \subset B_1 \cup B_2 \cup \dots \cup B_p.
+\]</span> Since for any <span class="math inline">\(k=1,\dots,
+p\)</span>, we have <span class="math inline">\(\lim_{t \to +\infty}
+x(t, B_k) = \{x_*\}\)</span>, we have <span class="math display">\[
+\lim_{t \to +\infty} d_H(B_k, \{x_*\}) \to 0.
+\]</span> Since <span class="math inline">\(X_0 \subset \bar{X}_0
+\subset B_1 \cup B_2 \cup \dots \cup B_p\)</span>, <span class="math display">\[
+d_H(X_0, \{x_*\}) \leq d_H(\bar{X}_0, \{x_*\})
+\leq \max_{k=1...p} d_H(B_k, \{x_*\})
+\]</span> and thus <span class="math display">\[
+\lim_{t \to +\infty} d_H(X_0, \{x_*\}) \to 0.
+\]</span></p>
+</details>
+<h2 id="examples">Examples</h2>
+<p>The origin is an asymptotically stable equilibrium of the system
+<span class="math display">\[
+\dot{x}^1 = -2x^1+x^2, \; \dot{x}^2 = -2x^2+x^1, \qquad x = (x^1, x^2)
+\]</span> Indeed, the closed-form solution <span class="math inline">\(\eqref{LTI-solutions}\)</span> yields <span class="math display">\[
+\|x(t, x_0)\| \leq 2 \|x_0\| e^{-t}.
+\]</span> A set <span class="math inline">\(X_0\)</span> is compactly
+included in <span class="math inline">\(\mathbb{R}^n\)</span> if and
+only if it is a bounded subset of <span class="math inline">\(\mathbb{R}^n\)</span>. For any such set, <span class="math display">\[
+d_H(x(t, X_0), 0\}) \leq 2 \sup_{x_0 \in X_0} \|x_0\| e^{-t}.
+\]</span> Hence <span class="math inline">\(x(t, X_0) \to \{0\}\)</span>
+when <span class="math inline">\(t \to +\infty\)</span>: the origin is
+asymptotically stable.</p>
+<video controls="" style="width:100%;">
+<source src="videos/asymptotic-stability.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<video controls="" style="width:100%;">
+<source src="videos/vinograd-compact.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+<h1 id="stability-legacy-definitions-equivalence">Stability &amp; Legacy
+Definitions, Equivalence</h1>
+<h2 class="definition" id="stability">Stability</h2>
+<p>🚧 TODO 🚧</p>
+<hr/>
+<h2 class="proposition" id="proposition.-a.-s.-leftrightarrow-a.s.">Proposition. A. + S. <span class="math inline">\(\Leftrightarrow\)</span> A.S.</h2>
+<p>Attractivity + Stability <span class="math inline">\(\Leftrightarrow\)</span> Asymptotic Stability 🚧
+TODO 🚧</p>
+<h2 class="proof" id="section"></h2>
+<p>🚧 TODO 🚧</p>
+<h2 id="lemma.-a.s.-rightarrow-a.">Lemma. A.S. <span class="math inline">\(\Rightarrow\)</span> A.</h2>
+<details>
+<summary>
+<h3 class="proof" id="proof-2">Proof</h3>
+</summary>
+<p>Obvious (by design).</p>
+</details>
+<h2 id="lemma.-asymptotic-stability-implies-stability.">Lemma.
+Asymptotic Stability implies Stability.</h2>
+<details>
+<summary>
+<h3 class="proof" id="proof-3">Proof</h3>
+</summary>
+<p>Let’s assume that the system is asymptotically stable. Let <span class="math inline">\(r_1 &gt; 0\)</span> such that the closed ball
+<span class="math inline">\(B_1\)</span> of radius <span class="math inline">\(r_1\)</span> centered at <span class="math inline">\(x_e\)</span> is included in <span class="math inline">\(\mathrm{dom} \, f\)</span>. <span class="math display">\[
+B_1 := \{x \in \mathbb{R}^n \; | \; \|x - x_e\| \leq r_1 \} \subset
+\mathrm{dom} \, f.
+\]</span></p>
+<p>It is bounded, its closure is included in <span class="math inline">\(\mathrm{dom} \, f\)</span> and it is also a
+neighbourhood of <span class="math inline">\(x_e\)</span>. Since the the
+system is asymptotically stable, <span class="math inline">\(x(t,
+B_1)\)</span> is defined for any <span class="math inline">\(t\geq
+0\)</span> and there is a <span class="math inline">\(\tau \geq
+0\)</span> such that for any <span class="math inline">\(t \geq
+\tau\)</span>, the image of <span class="math inline">\(B_1\)</span> by
+<span class="math inline">\(x(t, \cdot)\)</span> is included in itself
+<span class="math display">\[
+t\geq \tau \, \Rightarrow \, x(t, B_1) \subset B_1.
+\]</span></p>
+<p>Additionally, the system is well-posed, hence there is a <span class="math inline">\(r_2 &gt; 0\)</span> such that for any <span class="math inline">\(x_0\)</span> in the closed ball <span class="math inline">\(B_2\)</span> of radius <span class="math inline">\(r_2\)</span> centered at <span class="math inline">\(x_e\)</span> is included in <span class="math inline">\(\mathrm{dom} \, f\)</span> and any <span class="math inline">\(t \in [0, \tau]\)</span>, we have <span class="math inline">\(\|x(x_0, t) - x(x_e, t) \| \leq r_1.\)</span>
+Since <span class="math inline">\(x_e\)</span> is an equilibrium, <span class="math inline">\(x(t, x_e) = x_e\)</span>, thus <span class="math inline">\(\|x(x_0, t) - x_e \| \leq r_1.\)</span>
+Equivalently, <span class="math display">\[
+0\leq t \leq \tau \, \Rightarrow \, x(t, B_2) \subset B_1.
+\]</span></p>
+<p>Note that since <span class="math inline">\(x(0, B_2) = B_2\)</span>,
+this inclusion yields <span class="math inline">\(B_2 \subset
+B_1\)</span>. Thus, for any <span class="math inline">\(t \geq
+0\)</span>, either <span class="math inline">\(t\in [0, \tau]\)</span>
+and <span class="math inline">\(x(t, B_2) \subset B_1\)</span>, or <span class="math inline">\(t\geq \tau\)</span> and since <span class="math inline">\(B_2 \subset B_1\)</span>, we have <span class="math inline">\(x(t, B_2) \subset x(t, B_1) \subset
+B_1\)</span>.</p>
+<p>To summarize our findings: we have established that for any <span class="math inline">\(r_1 &gt; 0\)</span> such that <span class="math inline">\(B_1 \subset \mathrm{dom} \, f\)</span> there is a
+<span class="math inline">\(r_2 &gt; 0\)</span> such that <span class="math display">\[
+t\geq 0 \, \Rightarrow x(t, B_2) \subset B_1.
+\]</span> Therefore that the system is stable.</p>
+</details>
+<h2 id="lemma.-a.-s.-rightarrow-a.s.">Lemma. A. + S. <span class="math inline">\(\Rightarrow\)</span> A.S.</h2>
+<details>
+<summary>
+<h3 class="proof" id="proof-4">Proof</h3>
+</summary>
+<p>ℹ️ We prove directly the stronger version of A.S.</p>
+<p>Let <span class="math inline">\(X_0\)</span> be a bounded set whose
+closure is included in <span class="math inline">\(\mathrm{dom} \,
+f\)</span>. We assume that additionally <span class="math inline">\(X_0\)</span> is closed (otherwise we substitute
+the closure of <span class="math inline">\(X_0\)</span> to <span class="math inline">\(X_0\)</span>).</p>
+<p>Let <span class="math inline">\(r_1 &gt; 0\)</span> and <span class="math inline">\(B_1\)</span> be the closed ball of radius <span class="math inline">\(r_1\)</span> centered on <span class="math inline">\(x_e\)</span>. Since the system is stable, there is
+a radius <span class="math inline">\(r_2 &gt; 0\)</span> such that for
+any <span class="math inline">\(t \geq 0\)</span>, <span class="math inline">\(x(t, B_2) \subset B_1\)</span>. Let <span class="math inline">\(r_3 := r_2/2\)</span> and <span class="math inline">\(B_3\)</span> be the ball of radius <span class="math inline">\(r_3\)</span> centered on <span class="math inline">\(x_e\)</span>.</p>
+<p>Let <span class="math inline">\(x_0 \in X_0\)</span> ; since <span class="math inline">\(x_e\)</span> is attractive, there is a <span class="math inline">\(\tau \geq 0\)</span> such that for any <span class="math inline">\(t\geq \tau,\)</span> <span class="math inline">\(x(t, x_0) \in B_3\)</span>. Since the system is
+well-posed, there is a radius <span class="math inline">\(r_4 &gt;
+0\)</span> such that for any <span class="math inline">\(t \in [0,
+\tau],\)</span> and any <span class="math inline">\(x_1\)</span> in the
+ball of radius <span class="math inline">\(r_4\)</span> centered on
+<span class="math inline">\(x_0\)</span>, <span class="math inline">\(\|x(t, x_1) - x(t, x_0)\| \leq r_3\)</span>.
+Consequently, <span class="math inline">\(\|x(\tau, x_1) - x(\tau,
+x_0)\| \leq r_3\)</span> and thus <span class="math display">\[
+\begin{split}
+\|x(\tau, x_1) - x(\tau, x_e)\|
+&amp;\leq
+\|x(\tau, x_1) - x(\tau, x_0)\| +
+\|x(\tau, x_0) - x(\tau, x_e)\| \\
+&amp;\leq r_3 + r_3 \\
+&amp;= r_2
+\end{split}
+\]</span> and thus <span class="math inline">\(x(\tau, x_1) \in
+B_2\)</span>. Since <span class="math inline">\(x(t, B_2) \subset
+B_1\)</span> for any <span class="math inline">\(t \geq \tau\)</span>,
+for any such <span class="math inline">\(t\)</span> we have <span class="math display">\[
+x(t, x_1) = x( t-\tau, x(\tau, x_1)) \in B_1.
+\]</span></p>
+<p>At this stage, we have proven that for any <span class="math inline">\(r_1 &gt; 0\)</span> and any <span class="math inline">\(x_0 \in X_0,\)</span> there is a <span class="math inline">\(\tau(x_0) &gt; 0\)</span> and a <span class="math inline">\(r_4(x_0)&gt;0\)</span> such that <span class="math display">\[
+\|x_1 - x_0\| \leq r_4(x_0) \; \wedge \; t\geq \tau(x_0)
+\; \Rightarrow \;
+\|x(t, x_1) - x_e\| \leq r_1.
+\]</span> The collection of open balls centered on <span class="math inline">\(x_0\)</span> and of radius <span class="math inline">\(r_0(x_0)\)</span>, indexed by <span class="math inline">\(x_0 \in X_0\)</span> is an open cover of the
+closed set <span class="math inline">\(X_0\)</span>, thus there is a
+finite collection <span class="math inline">\(x_0^1, \, x_0^2, \dots, \,
+x_0^m\)</span> of points of <span class="math inline">\(X_0\)</span>
+such that the open balls centered on <span class="math inline">\(x_0^k\)</span> with radius <span class="math inline">\(r_4(x_0^k)\)</span> cover <span class="math inline">\(X_0\)</span>. Consequently, for any <span class="math inline">\(x_0 \in X_0\)</span>, there is a <span class="math inline">\(k \in \{1, \dots, m\}\)</span> such that <span class="math inline">\(\|x_0 - x_0^k\| \leq r_4(x_0^k)\)</span> and thus
+<span class="math inline">\(\|x(t, x_0) - x_e\| \leq r_1\)</span> when
+<span class="math inline">\(t \geq \tau(x_0^k)\)</span>. Consequently,
+for any <span class="math inline">\(x_0 \in X_0\)</span>, if <span class="math display">\[
+t\geq \tau := \max_{i=1,\dots,m} \tau(x_0^k),
+\]</span> then <span class="math inline">\(\|x(t, x_0) - x_e\| \leq
+r_1\)</span>. Thus, the equilbrium is asymptotically stable.</p>
+</details>
+<h1 class="unnumbered" id="references">References</h1>
+<div class="references csl-bib-body hanging-indent" id="refs" role="doc-bibliography">
+<div class="csl-entry" id="ref-Kha02" role="doc-biblioentry">
+Khalil, Hassan K. 2002. <em>Nonlinear systems, third edition</em>.
+Prentice Hall, Inc.
+</div>
+<div class="csl-entry" id="ref-Kur66" role="doc-biblioentry">
+Kuratowski, K. 1966. <span>“Topology. Vol. I. New edition, revised and
+augmented.”</span>
+</div>
+<div class="csl-entry" id="ref-Son98" role="doc-biblioentry">
+Sontag, Eduardo D. 1998. <em>Mathematical control theory. Deterministic
+finite dimensional systems.</em> 2nd ed. Vol. 6. Texts Appl. Math. New
+York, NY: Springer.
+</div>
+<div class="csl-entry" id="ref-Vin57" role="doc-biblioentry">
+Vinograd, R. E. 1957. <span>“The inadequacy of the method of
+characteristic exponents when applied to non-linear equations.”</span>
+<em>Doklady Akademii Nauk SSSR</em> 114: 239–40.
+</div>
+</div>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1" role="doc-endnote"><blockquote>
+<p>L’erreur de ma vie fut dès lors de ne continuer longtemps aucune
+étude, pour n’avoir su prendre mon parti de renoncer à beaucoup
+d’autres. — N’importe quoi s’achetait trop cher à ce prix-là, et les
+raisonnements ne pouvaient venir à bout de ma détresse. Entrer dans un
+marché de délices, en ne disposant (grâce à Qui ?) que d’une somme trop
+minime ; en disposer ! <strong>Choisir, c’était renoncer pour toujours,
+pour jamais, à tout le reste</strong> — et la quantité nombreuse de ce
+reste demeurait préférable à n’importe quelle unité.</p>
+<p><em>André Gide, Les nourritures terrestres</em></p>
+</blockquote>
+<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></li>
+</ol>
+</section>
+</body>
+</html>

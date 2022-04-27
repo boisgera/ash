@@ -1,0 +1,117 @@
+[
+	{
+		"id": "Kur66",
+		"type": "article",
+		"language": "English",
+		"note": "Published: New York-London: Academic Press; Warszawa: PWN-Polish Scientific Publishers. XX, 560 p. (1966).",
+		"title": "Topology. Vol. I. New edition, revised and augmented",
+		"author": [
+			{
+				"family": "Kuratowski",
+				"given": "K."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1966"
+				]
+			]
+		}
+	},
+
+	{
+		"id": "Kha02",
+		"type": "book",
+		"ISBN": "0-13-067389-7",
+		"language": "English",
+		"publisher": "Prentice Hall, Inc.",
+		"address": "Upper Saddle River, NJ 07458",
+		"title": "Nonlinear systems, third edition",
+		"author": [
+			{
+				"family": "Khalil",
+				"given": "Hassan K."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2002"
+				]
+			]
+		}
+	},
+	{
+		"id": "Son98",
+		"type": "book",
+		"collection-title": "Texts Appl. Math.",
+		"edition": "2nd ed.",
+		"ISBN": "0-387-98489-5",
+		"language": "English",
+		"note": "ISSN: 0939-2475",
+		"publisher": "New York, NY: Springer",
+		"title": "Mathematical control theory. Deterministic finite dimensional systems.",
+		"volume": "6",
+		"author": [
+			{
+				"family": "Sontag",
+				"given": "Eduardo D."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1998"
+				]
+			]
+		}
+	},
+	{
+		"id": "Isi95",
+		"type": "book",
+		"collection-title": "Communications and Control Engineering",
+		"ISBN": "978-3-540-19916-8",
+		"note": "LCCN: 95014976",
+		"publisher": "Springer London",
+		"title": "Nonlinear Control Systems",
+		"URL": "https://books.google.fr/books?id=fPGzHK\\_pto4C",
+		"author": [
+			{
+				"family": "Isidori",
+				"given": "A."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1995"
+				]
+			]
+		}
+	},
+	{
+		"id": "Vin57",
+		"type": "article-journal",
+		"container-title": "Doklady Akademii Nauk SSSR",
+		"ISSN": "0002-3264",
+		"journalAbbreviation": "Dokl. Akad. Nauk SSSR",
+		"language": "Russian",
+		"page": "239–240",
+		"title": "The inadequacy of the method of characteristic exponents when applied to non-linear equations",
+		"volume": "114",
+		"author": [
+			{
+				"family": "Vinograd",
+				"given": "R. E."
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1957"
+				]
+			]
+		}
+	}
+]
